@@ -48,6 +48,10 @@ module Public
         if @user.gest_user?
           redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
         end
-      end  
+      end
+      
+      def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      end
   end
 end

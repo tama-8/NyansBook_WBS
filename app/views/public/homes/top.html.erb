@@ -1,19 +1,20 @@
 <div class="col-md-6 mx-auto mt-5">
-  <h1>welcome to <strong>にゃんずbook</strong>  !!</h1>
+  <h1>welcome</h1>
  
-  <p>“It is an SNS community site where pet owners connect by putting themselves in their cats’ shoes.”</p>
+  <p>It is an SNS community site where pet owners connect <br>
+  　　by putting themselves in their cats’ shoes.</p>
   
   
   <div class="btn-wrapper col-10 mx-auto">
         <div class="row">
            
-          <%= link_to "ゲストログイン（閲覧用）", public_users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+          <%= link_to "Guest　", public_users_guest_sign_in_path, class: "btn btn-secondary btn-sm mb-3 sign_in", method: :post %>
         </div>
         <div class="row">
-          <%= link_to "Log in",new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+          <%= link_to "Log　in　",new_customer_registration_path, class: "btn btn-info btn-sm mb-3 sign_in" %>
         </div>
         <div class="row">
-          <%= link_to "Sign Up",new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+          <%= link_to "Sign Up　", new_customer_registration_path, class: "btn btn-success btn-sm sign_up" %>
         </div>
       </div>
       

@@ -1,32 +1,37 @@
 Rails.application.routes.draw do
-  devise_for :users ,controllers: {
-    registrations: 'users/registrations'
+
+  # 管理者用
+  # URL /admin/sign_in ...
+  devise_for :admins, controllers: {
+    sessions: "admin/sessions"
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # 会員用
+  # URL /customers/sign_in ...
+  devise_for :customers, controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+
+
   # 会員側のルーティング
   namespace :public do
     # トップページとアバウトページ
-    root 'homes#top'  
+    root 'homes#top'
     get '/about', to: 'homes#about'
-    #ゲストユーザー
-    devise_scope :user do
-    post "users/guest_sign_in", to: "users/sessions#guest_sign_in",as: :users_guest_sign_in
-    end
+
+    # ゲストユーザー
+    post 'users/guest_sign_in', to: 'application#guest_sign_in', as: :users_guest_sign_in
+
     # マイページ
     get 'mypage', to: 'users#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
     patch 'users/withdraw', to: 'users#withdraw', as: 'withdraw_user'
-    resources :users, only: [:show, :edit, :update] do
-      member do
-        # ユーザー詳細
-        get :show
-        # ユーザー編集
-        get :edit
-        # ユーザー更新処理
-        patch :update
-      end
+    resources :users, only: [:show, :edit, :update] 
+      
     end
   end
+
 
   # 管理側のルーティング
 #   namespace :admin do
@@ -39,4 +44,3 @@ Rails.application.routes.draw do
 #   end
 
   # その他のルーティング...
-end
