@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2024_08_02_121449) do
 
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
+    t.string "name", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -65,11 +66,11 @@ ActiveRecord::Schema.define(version: 2024_08_02_121449) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "customer_id", null: false
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["customer_id"], name: "index_posts_on_customer_id"
   end
 
   create_table "users", force: :cascade do |t|

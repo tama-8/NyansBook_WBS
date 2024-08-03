@@ -14,6 +14,14 @@
  *= require_self
  */
 
+@import "public/top";
+@import "public/about";
 
+.navbar {
+  display: flex;
+  justify-content: center; /* ヘッダー内でアイテムを中央に配置 */
+}
 
-
+.navbar-brand {
+  max-width: 100%; /* ヘッダーの幅に合わせる */
+}

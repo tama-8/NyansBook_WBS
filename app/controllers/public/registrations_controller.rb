@@ -47,12 +47,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
   
   def after_sign_up_path_for(resource)
       # サインアップ後にリダイレクトするパス
-      user_path(resource)
+      public_root_path
   end
 
   def after_update_path_for(resource)
       # アカウント更新後にリダイレクトするパス
-      user_path(resource)
+      public_customers_path(resource)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

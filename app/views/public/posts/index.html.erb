@@ -1,0 +1,13 @@
+<% @posts.each do |post| %>
+  <div>
+    
+     <p>画像</p>
+  <% if post.image.attached? %>
+    <%= image_tag post.image, size: "200x200" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
+    <p>説明：<%= post.content %></p>
+    <p>ユーザーネーム：<%= post.customer.name %></p>
+  </div>
+<% end %>

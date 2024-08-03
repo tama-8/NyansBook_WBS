@@ -1,0 +1,14 @@
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; // 画像とテキストの間にスペースを設ける
+
+    .about-image {
+        max-width: 100%; // 画像が親要素を超えないようにする
+        height: auto; // 高さは自動調整
+    }
+
+    .about-text {
+        flex: 1; // テキスト部分が残りのスペースを占める
+    }
+}

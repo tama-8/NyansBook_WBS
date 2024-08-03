@@ -13,22 +13,23 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
-
+# ゲストユーザー
+    post 'customers/guest_sign_in', to: 'application#guest_sign_in', as: :customers_guest_sign_in
   # 会員側のルーティング
   namespace :public do
     # トップページとアバウトページ
     root 'homes#top'
     get '/about', to: 'homes#about'
 
-    # ゲストユーザー
-    post 'users/guest_sign_in', to: 'application#guest_sign_in', as: :users_guest_sign_in
+    
 
     # マイページ
-    get 'mypage', to: 'users#mypage', as: 'mypage'
+    get 'mypage', to: 'customers#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
-    patch 'users/withdraw', to: 'users#withdraw', as: 'withdraw_user'
-    resources :users, only: [:show, :edit, :update] 
-      
+    patch 'customers/withdraw', to: 'customers#withdraw', as: 'withdraw_customer'
+    resources :customers
+    resources :posts, only: [:new, :create, :index, :show, :edit, :destroy]
+    resource :session, only: [:new, :create, :destroy]
     end
   end
 

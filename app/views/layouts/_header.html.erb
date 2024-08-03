@@ -1,28 +1,30 @@
 <header >
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!--<div class="container">-->
-      <a class="navbar-brand" href="/"><span>にゃんずbook</span></a>
+     <a class="navbar-brand" href="/">
+  <%= image_tag 'logo.png', alt: 'にゃんずbookロゴ',style:' height: 70px;' %>
+</a>
       
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li>
-            <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
+            <%= link_to public_customer_path(current_customer),class: 'nav-link text-light' do %>
               <i class="fas fa-home"></i> Home
             <% end %>
           </li>
           <li>
-            <%=  link_to users_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i> Users
+            <%=  link_to public_mypage_path,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-cat"></i>mypage
             <% end %>
           </li>
           <li>
-            <%=  link_to books_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-book-open"></i> Books
+            <%=  link_to new_public_post_path ,class: 'nav-link text-light' do %>
+             <i class="fa-brands fa-instagram"></i> post
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+            <%= link_to destroy_customer_session_path, method: :delete,class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i> logout
             <% end %>
           </li>

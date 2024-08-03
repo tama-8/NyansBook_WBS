@@ -1,0 +1,12 @@
+// Place all the styles related to the public/homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.top-page-background {
+  background-image: image-url('top.png'); /* assets/images/top.png */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* ビューポートの高さに合わせる */
+}
+

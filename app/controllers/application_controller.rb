@@ -1,20 +1,43 @@
 class ApplicationController < ActionController::Base
+  
+    helper_method :current_user
+
+   def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+   end
     
-  def after_sign_in_path_for(resource)
+ # def after_sign_in_path_for(resource)
+    # case resource
+    # when Admin
+    #   admin_path
+    # when Customer
+    #   public_posts_path
+    # else
+    #   public_root_path
+    # end
+ # end
+
+  def after_sign_out_path_for(resource)
     case resource
     when Admin
       admin_path
     when Customer
-      root_path
+      about_path
     else
-      root_path
+      public_root_path
     end
   end
   
   def guest_sign_in
-    user = User.guest
-    sign_in user
-    redirect_to user_path(user), notice: 'ゲストユーザーとしてログインしました。'
+    customer= Customer.guest
+    sign_in customer
+    redirect_to public_customer_path(customer), notice: 'ゲストユーザーとしてログインしました。'
+  end
+  
+   protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
   
 end

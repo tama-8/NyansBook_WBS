@@ -1,0 +1,16 @@
+<table class="table">
+  <tr><%= image_tag @customer.get_profile_image(100,100) %></tr>
+  <tr>
+    <th>name</th>
+    <th><%= @customer.name %></th>
+  </tr>
+  <!--<tr>-->
+    <!--<th>introduction</th>-->
+     <!--<th><%#= @customer.introduction %></th>
+  <!--</tr>-->
+</table>
+<% unless @customer.guest_customer? %>
+<div class="row">
+  <%= link_to "",edit_customer_registration_path(@customer),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{@customer.id}" %>
+</div>
+<% end %>
