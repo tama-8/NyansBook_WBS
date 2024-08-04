@@ -1,0 +1,18 @@
+<h1>情報の編集</h1>
+
+<%= form_with model: @customer, url: public_customer_path(@customer), method: :patch, local: true do |f| %>
+  <div>
+    <%= f.label :name, '名前' %>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= f.label :email, 'Eメール' %>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.label :image, 'プロフィール写真' %>
+    <%= f.file_field :image, accept: "image/*" %>
+  </div>
+  <%= f.submit '更新', class: 'btn btn-primary' %>
+<% end %>
+<%= link_to 'キャンセル', public_mypage_path, class: 'btn btn-secondary' %>

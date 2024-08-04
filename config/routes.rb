@@ -26,9 +26,9 @@ Rails.application.routes.draw do
     # マイページ
     get 'mypage', to: 'customers#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
-    patch 'customers/withdraw', to: 'customers#withdraw', as: 'withdraw_customer'
-    resources :customers
-    resources :posts, only: [:new, :create, :index, :show, :edit, :destroy]
+    delete 'customers/withdraw', to: 'customers#withdraw', as: 'withdraw_customer'
+    resources :customers,only: [:show, :edit, :update, :destroy]
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resource :session, only: [:new, :create, :destroy]
     end
   end

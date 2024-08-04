@@ -4,6 +4,8 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
+         
+   has_one_attached :image      
   has_many :posts, dependent: :destroy
    #ゲストユーザー
    GUEST_USER_EMAIL = "guest@example.com"
@@ -28,5 +30,15 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  #name 属性のバリデーションが追加
+   validates :name, presence: true
+   validates :email, presence: true, uniqueness: true
+    # カスタムバリデーション
+   validates :password, presence: true, confirmation: true, if: :password_required?
 
+  private
+  
+    def password_required?
+      new_record? || password.present?
+    end
 end

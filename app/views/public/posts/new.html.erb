@@ -1,11 +1,21 @@
 <h1>画像投稿フォーム</h1>
-<%= form_with model: @post , url: public_posts_path do |f| %>
 
-  <h4>Phot</h4>
-  <%= f.file_field :image, accept: "image/*" %>
+<%= form_with model: @post, url: public_posts_path, local: true do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h4>Photo</h4>
+  <%= f.file_field :image, accept: "image/*", required: true %>
   
   <h4>Content</h4>
   <%= f.text_area :content, required: true %>
   <%= f.submit '投稿' %>
-  
-  <% end %>
+<% end %>

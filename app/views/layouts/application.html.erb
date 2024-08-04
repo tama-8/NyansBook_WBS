@@ -16,12 +16,13 @@
      <%= render 'layouts/header' %>
       <main class="mb-auto">
       
-        <% if notice %>
-          <p class="my-3 alert alert-primary"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="my-3 alert alert-danger"><%= alert %></p>
-        <% end %>
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert"><%= flash[:alert] %></div>
+    <% end %>
       
     <%= yield %>
     </main>

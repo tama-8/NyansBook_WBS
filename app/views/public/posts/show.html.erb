@@ -1,12 +1,20 @@
+<h1>投稿詳細</h1>
+
 <div>
-  <%= image_tag @post.get_image %>
-  <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
-  <p>説明：<%= @post.content %></p>
- 
-  <p>ユーザーネーム：<%= @post.customer.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  
-  <% if @post.user == current_customer %>
-    <%= link_to "削除", post_image_path(@post), method: :delete %>
+  <p>画像</p>
+  <% if @post.image.attached? %>
+    <%= image_tag @post.image, size: "400x400" %>
+  <% else %>
+    <%= image_tag 'no_image.png', size: "400x400" %>
   <% end %>
+  <p>説明：<%= @post.content %></p>
+  <p>ユーザーネーム：<%= @post.customer.name %></p>
+  <% if @post.customer.image.attached? %>
+    <p>投稿ユーザー画像：<%= image_tag @post.customer.image, size: "100x100" %></p>
+  <% else %>
+    <p>投稿ユーザー画像：<%= image_tag 'no_image.png', size: "100x100" %></p>
+  <% end %>
+  <%= link_to '編集', edit_public_post_path(@post), class: 'btn btn-primary' %>
+  <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+  <%= link_to '戻る', public_posts_path, class: 'btn btn-secondary' %>
 </div>

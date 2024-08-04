@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
     #ActiveStorage を使って画像を持たせる
   has_one_attached :image
-  belongs_to :user
+  belongs_to :customer
   
    def get_image
     unless image.attached?
@@ -13,5 +13,5 @@ class Post < ApplicationRecord
 
  
   validates :content, presence: true
-  
+  validates :image, presence: { message: 'を選択してください' }
 end

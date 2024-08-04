@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  
+    before_action :authenticate_customer!, except: [:top,:about]
+    before_action :configure_permitted_parameters, if: :devise_controller?
     helper_method :current_user
 
    def current_user
