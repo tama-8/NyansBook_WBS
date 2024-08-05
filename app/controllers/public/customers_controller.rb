@@ -1,8 +1,9 @@
 module Public
   class CustomersController < ApplicationController
       # before_action :authenticate_customer!
-      before_action :ensure_guest_customer, only: [:edit,:update, :destroy]
+     
       before_action :set_customer, only: [:show, :edit, :update, :destroy]
+       before_action :ensure_guest_customer, only: [:edit,:update, :destroy]
       
       
       
