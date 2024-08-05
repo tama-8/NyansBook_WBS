@@ -1,14 +1,19 @@
+
 .about-content {
     display: flex;
-    align-items: flex-start;
-    gap: 20px; // 画像とテキストの間にスペースを設ける
+    flex-direction: column;
+    align-items: center;
+     margin-top: 20px; /* 上に間隔を追加 */
+}
 
-    .about-image {
-        max-width: 100%; // 画像が親要素を超えないようにする
-        height: auto; // 高さは自動調整
-    }
+.about-image {
+    width: 60%; /* 画像を小さくする */
+    border-radius: 20px; /* 角を丸くする */
+    margin-bottom: 20px;
+}
 
-    .about-text {
-        flex: 1; // テキスト部分が残りのスペースを占める
-    }
+.about-text {
+    max-width: 800px;
+    text-align: left;
+    padding: 0 20px;
 }

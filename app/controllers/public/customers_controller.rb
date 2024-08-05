@@ -51,7 +51,7 @@ module Public
       end
     
        def ensure_guest_customer
-          if @customer&.guest_customer?
+          if @customer.email == "guest@example.com"
             redirect_to public_mypage_path, notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
           end
        end

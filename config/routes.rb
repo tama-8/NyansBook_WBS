@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   }
 
 # ゲストユーザー
-    post 'customers/guest_sign_in', to: 'application#guest_sign_in', as: :customers_guest_sign_in
+  devise_scope :customer do
+      post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in', as: :customers_guest_sign_in
+  end
   # 会員側のルーティング
   namespace :public do
     # トップページとアバウトページ

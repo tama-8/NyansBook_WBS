@@ -29,11 +29,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def guest_sign_in
-    customer= Customer.guest
-    sign_in customer
-    redirect_to public_customer_path(customer), notice: 'ゲストユーザーとしてログインしました。'
-  end
+  
   
    protected
 

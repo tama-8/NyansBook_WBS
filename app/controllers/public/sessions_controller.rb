@@ -6,7 +6,19 @@ class Public::SessionsController < Devise::SessionsController
     public_posts_path
     # 遷移先のパス
   end
-
+  
+  def guest_sign_in
+    customer = Customer.guest
+    sign_in customer
+    redirect_to public_customer_path(customer), notice: 'ゲストユーザーとしてログインしました。'
+  end
+  GUEST_USER_EMAIL = "guest@example.com"
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.name = "guestuser"
+    end
+  end
   # GET /resource/sign_in
   # def new
     
