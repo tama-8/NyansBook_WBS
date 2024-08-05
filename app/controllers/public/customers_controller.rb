@@ -32,13 +32,6 @@ module Public
           end
       end
     
-      def destroy
-         @customer = current_customer
-          @customer.destroy
-          flash[:notice] = '退会が完了しました。'
-          redirect_to new_customer_registration_path
-      end
-    
       def withdraw
         @customer = current_customer
        if @customer.destroy
@@ -65,7 +58,7 @@ module Public
       
       def customer_params
            # ストロングパラメータを適用
-          params.require(:customer).permit(:name, :email, :password, :password_confirmation, :image)
+          params.require(:customer).permit(:name, :email, :password, :password_confirmation, :image,:bio)
         
       end
       

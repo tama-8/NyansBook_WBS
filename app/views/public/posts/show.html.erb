@@ -1,20 +1,40 @@
-<h1>投稿詳細</h1>
+<!--<h1 class="text-center">投稿詳細</h1>-->
 
-<div>
-  <p>画像</p>
-  <% if @post.image.attached? %>
-    <%= image_tag @post.image, size: "400x400" %>
-  <% else %>
-    <%= image_tag 'no_image.png', size: "400x400" %>
-  <% end %>
-  <p>説明：<%= @post.content %></p>
-  <p>ユーザーネーム：<%= @post.customer.name %></p>
-  <% if @post.customer.image.attached? %>
-    <p>投稿ユーザー画像：<%= image_tag @post.customer.image, size: "100x100" %></p>
-  <% else %>
-    <p>投稿ユーザー画像：<%= image_tag 'no_image.png', size: "100x100" %></p>
-  <% end %>
-  <%= link_to '編集', edit_public_post_path(@post), class: 'btn btn-primary' %>
-  <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-  <%= link_to '戻る', public_posts_path, class: 'btn btn-secondary' %>
+<div class="d-flex justify-content-center">
+  <div class="card" style="width: 100%;border: none; box-shadow: none;">
+    <div class="row no-gutters">
+      <div class="col-md-6">
+        <div class="card-body text-center">
+          <% if @post.image.attached? %>
+            <%= image_tag @post.image, style: "width: 100%; height: 700px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag 'no_image.png', style: "width: 100%; height: 700px; object-fit: cover;" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+            <% if @post.customer.image.attached? %>
+              <%= link_to public_customer_path(@post.customer) do %>
+                <%= image_tag @post.customer.image, size: "50x50", class: "rounded-circle mr-2" %>
+              <% end %>
+            <% else %>
+              <%= link_to public_customer_path(@post.customer) do %>
+                <%= image_tag 'no_image.png', size: "50x50", class: "rounded-circle mr-2" %>
+              <% end %>
+            <% end %>
+            <!--ユーザーネーム-->
+            <p class="mb-0"style="font-weight: bold;"><%= @post.customer.name %></p>
+              <div class="d-flex align-items-center mb-3">
+             <p>説明：<%= @post.content %></p>
+          </div>
+          <% if @post.customer == current_customer %>
+            <%= link_to '編集', edit_public_post_path(@post), class: 'btn btn-primary' %>
+            <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          <% end %>
+          <%= link_to '戻る', public_posts_path, class: 'btn btn-secondary' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

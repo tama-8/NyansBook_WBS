@@ -13,6 +13,11 @@
     <%= f.label :image, 'プロフィール写真' %>
     <%= f.file_field :image, accept: "image/*" %>
   </div>
+  <div>
+    <%= f.label :bio, '自己紹介' %>
+    <%= f.text_area :bio %>
+  </div>
+  
   <%= f.submit '更新', class: 'btn btn-primary' %>
 <% end %>
 <%= link_to 'キャンセル', public_mypage_path, class: 'btn btn-secondary' %>
