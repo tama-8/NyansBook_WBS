@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     when Customer
       about_path
     else
-      public_withdraw_customer_path
+      public_about_path
     end
   end
   
