@@ -19,8 +19,6 @@ Rails.application.routes.draw do
   end
   # 会員側のルーティング
   namespace :public do
-    # トップページとアバウトページ
-        
      #aboutページ
     get '/about', to: 'homes#about'
     # マイページ
