@@ -47,7 +47,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   
   def after_sign_up_path_for(resource)
       # マイページ遷移先のパス
-      public_withdraw_customer
+      public_withdraw_customer_path
   end
 
   def after_update_path_for(resource)
