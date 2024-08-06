@@ -20,14 +20,10 @@ Rails.application.routes.draw do
   # 会員側のルーティング
   namespace :public do
     # トップページとアバウトページ
-     scope module: :public do
-        root 'homes#top',as: :public_root
-     end
-     
+        root 'homes#top'
+
+     #aboutページ
     get '/about', to: 'homes#about'
-
-    
-
     # マイページ
     get 'mypage', to: 'customers#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
