@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  root 'public/homes#top'
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admins, controllers: {
@@ -20,8 +20,7 @@ Rails.application.routes.draw do
   # 会員側のルーティング
   namespace :public do
     # トップページとアバウトページ
-        root 'homes#top'
-
+        
      #aboutページ
     get '/about', to: 'homes#about'
     # マイページ
