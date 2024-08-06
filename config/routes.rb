@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   # 会員側のルーティング
   namespace :public do
     # トップページとアバウトページ
-    root 'homes#top'
+     scope module: :public do
+        root 'homes#top',as: :public_root
+     end
+     
     get '/about', to: 'homes#about'
 
     
