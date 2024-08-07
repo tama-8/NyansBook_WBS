@@ -1,9 +1,9 @@
 module Public
   class CustomersController < ApplicationController
-      # before_action :authenticate_customer!
-     
-      before_action :set_customer, only: [:show, :edit, :update, :destroy]
-       before_action :ensure_guest_customer, only: [:edit,:update, :destroy]
+    before_action :authenticate_customer!
+    before_action :set_customer, only: [:show, :edit, :update, :destroy]
+    before_action :ensure_guest_customer, only: [:edit, :update, :destroy]
+    before_action :correct_customer, only: [:edit, :update]
       
       
       
@@ -14,11 +14,10 @@ module Public
       
       def mypage 
           @customer = current_customer
-         
       end
       
       def edit
-         @customer = current_customer
+        @customer = Customer.find(params[:id])
       end
     
       def update
@@ -56,6 +55,11 @@ module Public
             redirect_to public_mypage_path, notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
           end
        end
+      # ログインユーザー以外のIDでユーザー編集画面のURLを入力　マイページへリダイレクト
+        def correct_customer
+          @customer = Customer.find_by(id: params[:id])
+          redirect_to public_mypage_path, alert: '権限がありません。' unless @customer == current_customer
+        end
       
       def customer_params
            # ストロングパラメータを適用
