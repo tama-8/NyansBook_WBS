@@ -35,7 +35,7 @@
               <%= image_tag 'no_image.png', class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
             <% end %>
           <% end %>
-          <div class="card-body d-flex flex-column">
+          <div class="card-body">
             <div class="d-flex align-items-center mb-3">
               <% if post.customer.image.attached? %>
                 <%= link_to public_customer_path(post.customer) do %>
@@ -46,11 +46,14 @@
                   <%= image_tag 'no_image.png', size: "50x50", class: "rounded-circle mr-2" %>
                 <% end %>
               <% end %>
-              <p class="mb-0">ユーザーネーム：<%= post.customer.name %></p>
+              <!--ユーザーネーム-->
+              <p class="mb-0"><%= post.customer.name %></p>
             </div>
-            <!-- 文章をトリミング -->
-            <p class="card-text">説明：<%= truncate(post.content, length: 100) %></p>
-            <%= link_to '詳細を見る', public_post_path(post), class: 'btn btn-primary mt-auto' %>
+            <!--投稿日時表記-->
+            <p class="text-muted mb-1"><%= time_ago_in_japanese(post.created_at) %></p>
+            <!-- 説明文章をトリミング -->
+            <p class="card-text"><%= truncate(post.content, length: 100) %></p>
+            <%= link_to '詳細を見る', public_post_path(post), class: 'btn btn-primary' %>
           </div>
         </div>
       </div>
