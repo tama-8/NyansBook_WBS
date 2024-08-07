@@ -1,10 +1,10 @@
 <h1 class="text-center">Post List</h1>
 
 <div class="container d-flex justify-content-center">
-  <div class="row">
+  <div class="row w-100">
     <% @posts.each do |post| %>
       <div class="col-md-4 mb-4 d-flex justify-content-center">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem; height: 400px;">
           <%= link_to public_post_path(post) do %>
             <% if post.image.attached? %>
               <%= image_tag post.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
@@ -25,7 +25,8 @@
               <% end %>
               <p class="mb-0">ユーザーネーム：<%= post.customer.name %></p>
             </div>
-            <p class="card-text">説明：<%= post.content %></p>
+            <!-- 文章をトリミング -->
+            <p class="card-text">説明：<%= truncate(post.content, length: 100) %> </p>
             <%= link_to '詳細を見る', public_post_path(post), class: 'btn btn-primary' %>
           </div>
         </div>

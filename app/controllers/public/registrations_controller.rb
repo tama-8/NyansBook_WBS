@@ -46,8 +46,8 @@ class Public::RegistrationsController < Devise::RegistrationsController
   end
   
   def after_sign_up_path_for(resource)
-      # サインアップ後にリダイレクトするパス
-      public_root_path
+      # マイページ遷移先のパス
+      public_mypage_path
   end
 
   def after_update_path_for(resource)

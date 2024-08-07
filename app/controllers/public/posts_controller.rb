@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
     
     def index
-      @posts = Post.all
+      @posts = Post.order(created_at: :desc)  # 新規投稿順に並べ替え
       
     end
 

@@ -38,4 +38,9 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-/.env
+
+# 環境変数ファイルを無視
+.env
+
+# 特定のファイルを無視
+config/routes.rb:wq
