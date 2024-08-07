@@ -5,6 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
 olivia = Customer.find_or_create_by!(email: "olivia@example.com") do |customer|
   customer.name = "Olivia"
   customer.password = "password"
