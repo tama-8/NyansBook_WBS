@@ -1,0 +1,11 @@
+/* テキストのトリミング */
+.card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* マイページ*/
+.btn-custom-width {
+  width: 200px; /* 適当な幅を指定してください */
+}
