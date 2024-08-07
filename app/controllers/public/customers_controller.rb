@@ -9,7 +9,7 @@ module Public
       
       def show
           @customer = Customer.find(params[:id])
-          @posts =@customer.posts   
+          @posts = @customer.posts.order(created_at: :desc)  # 新規投稿順に並べ替え   
       end
       
       def mypage 
