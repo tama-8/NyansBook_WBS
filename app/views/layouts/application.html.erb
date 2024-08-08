@@ -11,13 +11,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100 <%= 'top-page-background' if current_page?(controller: 'homes', action: 'top') %>">
+  <body class="d-flex flex-column vh-100 <%= 'top-page-background' if current_page?(controller: 'public/homes', action: 'top') %>">
     <%= render 'layouts/header' %>
     <main class="mb-auto">
       <!--検索機能-->
-      <div class="d-flex justify-content-center mb-2">
-        <%= render 'searches/form' %>
-      </div>
+      <!--<div class="d-flex justify-content-center mb-2">-->
+      <!--  <%#= render 'searches/form' %>-->
+      <!--</div>-->
 
       <!-- フラッシュメッセージの表示 -->
       <% if notice %>
