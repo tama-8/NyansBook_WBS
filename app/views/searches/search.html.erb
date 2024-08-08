@@ -1,0 +1,26 @@
+
+<div class="container d-flex flex-column align-items-center">
+ 
+  <% if @model == 'post' %>
+    <h3 class="text-center mt-4">Posts search for "<%= @content %>"</h3>
+    <% if @records.present? %>
+      <%= render 'public/posts/index', posts: @records %>
+    <% else %>
+      <!-- 検索結果がない場合に表示される -->
+      <p class="text-center mt-4">No posts found.</p>
+    <% end %>
+  <% elsif @model == 'customer' %>
+    <h3 class="text-center mt-4">Customers search for "<%= @content %>"</h3>
+    <% if @records.present? %>
+      <% @records.each do |customer| %>
+        <%= render 'public/customers/index', customer: customer %>
+      <% end %>
+    <% else %>
+      <!-- 検索結果がない場合に表示される -->
+      <p class="text-center mt-4">No customers found.</p>
+    <% end %>
+  <% else %>
+    <!-- モデルが指定されていない場合の表示 -->
+    <p class="text-center mt-4">No results found.</p>
+  <% end %>
+</div>

@@ -1,0 +1,17 @@
+<% if customer_signed_in? %>
+  <%= form_with url: search_path, method: :get, local: true, html: { class: 'mt-4' } do |f| %>
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <%= f.text_field :content, class: 'form-control mb-2' %>
+      </div>
+      <div class="col-auto">
+        <%= f.select :model, options_for_select({ "Customer" => "customer", "Post" => "post" }), {}, { class: 'form-control mb-2' } %>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-2"style="width: 150px;">
+          <i class="fa-solid fa-magnifying-glass"></i> 
+        </button>
+      </div>
+    </div>
+  <% end %>
+<% end %>
