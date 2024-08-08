@@ -1,24 +1,26 @@
-<h1>Search Results</h1>
 
-<%= form_with url: search_path, method: :get, local: true do %>
-  <%= label_tag :model, "Model" %>
-  <%= select_tag :model, options_for_select([['Customer', 'customer'], ['Post', 'post']]) %>
-
-  <%= label_tag :content, "Content" %>
-  <%= text_field_tag :content, params[:content] %>
-
-  <%= label_tag :method, "Method" %>
-  <%= select_tag :method, options_for_select([['Partial Match', 'partial'], ['Exact Match', 'perfect']]) %>
-
-  <%= submit_tag "Search" %>
-<% end %>
-
-<% if @records.present? %>
-  <ul>
-    <% @records.each do |record| %>
-      <li><%= record.respond_to?(:name) ? record.name : record.content %></li>
+<div class="container d-flex flex-column align-items-center">
+ 
+  <% if @model == 'post' %>
+    <h3 class="text-center mt-4">Posts search for "<%= @content %>"</h3>
+    <% if @records.present? %>
+      <%= render 'public/posts/index', posts: @records %>
+    <% else %>
+      <!-- 検索結果がない場合に表示される -->
+      <p class="text-center mt-4">No posts found.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>No results found</p>
-<% end %>
+  <% elsif @model == 'customer' %>
+    <h3 class="text-center mt-4">Customers search for "<%= @content %>"</h3>
+    <% if @records.present? %>
+      <% @records.each do |customer| %>
+        <%= render 'public/customers/index', customer: customer %>
+      <% end %>
+    <% else %>
+      <!-- 検索結果がない場合に表示される -->
+      <p class="text-center mt-4">No customers found.</p>
+    <% end %>
+  <% else %>
+    <!-- モデルが指定されていない場合の表示 -->
+    <p class="text-center mt-4">No results found.</p>
+  <% end %>
+</div>
