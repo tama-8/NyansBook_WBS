@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
 
+  get 'searches/search'
   root 'public/homes#top'
-
+  get '/search', to: 'searches#search'
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admins, controllers: {
