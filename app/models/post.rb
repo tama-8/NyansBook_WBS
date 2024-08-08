@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     #ActiveStorage を使って画像を持たせる
   has_one_attached :image
+  has_many :post_comments, dependent: :destroy
   belongs_to :customer
   
    def get_image
