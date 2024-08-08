@@ -2,14 +2,25 @@
 
 class Admin::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  def create
+    super do |admin|
+      session[:admin_id] = admin.id
+    end
+  end
+  
+    protected
+
   def after_sign_in_path_for(resource)
-    admin_path
-    # 遷移先のパス
+    admin_customers_path# ログイン後にリダイレクトするパスを会員一覧ページに設定
+  end
+  
+  def after_sign_out_path_for(resource_or_scope)
+    new_admin_session_path # ログアウト後にリダイレクトするパス
   end
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource/sign_in
   # def create

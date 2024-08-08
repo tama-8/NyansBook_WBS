@@ -36,17 +36,16 @@ Rails.application.routes.draw do
     resource :session, only: [:new, :create, :destroy]
     
   end
-end
+
 
 
   # 管理側のルーティング
-#   namespace :admin do
-#     root 'homes#top'  # 管理側のトップページ
-#     resources :users, only: [:index, :show, :edit, :update, :destroy]
-#     resources :posts, only: [:index, :show, :destroy]
-#     resources :comments, only: [:index, :show, :destroy]
-#     resources :reports, only: [:index, :show, :update]
-#     # その他の管理側ルーティングをここに記述
-#   end
-
-  # その他のルーティング...
+  namespace :admin do
+     root to: 'customers#index' # ログイン後のリダイレクト先を会員一覧に設定
+    resources :customers, only: [:index, :show, :destroy]
+    resources :posts, only: [:index, :show, :destroy] do
+      resources :post_comments, only:[:destory]
+    end
+  end
+end
+ 
