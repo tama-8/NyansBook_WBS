@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: "admin/sessions"
   }
-
+  # 未認証の管理者がアクセスした際のリダイレクト先を指定
+   unauthenticated :admin do
+    root 'admin/sessions#new', as: :unauthenticated_admin_root
+  end
   # 会員用
   # URL /customers/sign_in ...
   devise_for :customers, controllers: {
@@ -43,7 +46,7 @@ Rails.application.routes.draw do
   namespace :admin do
      root to: 'customers#index' # ログイン後のリダイレクト先を会員一覧に設定
     resources :customers, only: [:index, :show, :destroy]
-    resources :posts, only: [:index, :show, :destroy] do
+    resources :posts, only: [:index, :show, :destroy, :edit, :update] do
       resources :post_comments, only:[:destory]
     end
   end

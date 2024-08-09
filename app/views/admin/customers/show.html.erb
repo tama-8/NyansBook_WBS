@@ -1,0 +1,26 @@
+<h1>管理者側会員詳細</h1>
+
+<div class="card">
+  <div class="card-header">
+    <h2><%= @customer.name %></h2>
+  </div>
+  <div class="card-body">
+    <p><strong>ID:</strong> <%= @customer.id %></p>
+    <p><strong>名前:</strong> <%= @customer.name %></p>
+    <p><strong>メールアドレス:</strong> <%= @customer.email %></p>
+    <p><strong>登録日:</strong> <%= @customer.created_at.strftime('%Y-%m-%d') %></p>
+
+    <!-- プロフィール画像の表示 -->
+    <% if @customer.image.attached? %>
+      <%= image_tag @customer.image, size: "200x200", class: "rounded-circle" %>
+    <% else %>
+      <%= image_tag 'no_image.png', size: "200x200", class: "rounded-circle" %>
+    <% end %>
+
+    <!-- アクションボタン -->
+    <div class="mt-4">
+      <%= link_to '編集', edit_admin_customer_path(@customer), class: 'btn btn-primary' %>
+      <%= link_to '削除', admin_customer_path(@customer), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
