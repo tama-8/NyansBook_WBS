@@ -1,0 +1,7 @@
+<!--customerの検索-->
+<%= form_with(url: admin_customers_path, method: :get, local: true, class: 'form-inline') do %>
+  <div class="form-group mx-sm-3 mb-2">
+    <%= text_field_tag :query, params[:query], placeholder: "名前またはメールアドレスで検索", class: 'form-control' %>
+  </div>
+  <%= submit_tag "検索", class: 'btn btn-primary mb-2' %>
+<% end %>

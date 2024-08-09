@@ -2,6 +2,9 @@
 
 class Admin::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  # before_action :authenticate_admin!
+  # skip_before_action :authenticate_admin!, only: [:new, :create]
+  # その他のコード
   def create
     super do |admin|
       session[:admin_id] = admin.id
@@ -18,9 +21,9 @@ class Admin::SessionsController < Devise::SessionsController
     new_admin_session_path # ログアウト後にリダイレクトするパス
   end
   # GET /resource/sign_in
-  def new
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource/sign_in
   # def create

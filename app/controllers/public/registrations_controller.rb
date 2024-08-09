@@ -45,10 +45,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
   
-  def after_sign_up_path_for(resource)
-      # マイページ遷移先のパス
-      public_mypage_path
-  end
+#   def after_sign_up_path_for(resource)
+#       # マイページ遷移先のパス
+#       public_mypage_path
+#   end
 
   def after_update_path_for(resource)
       # アカウント更新後にリダイレクトするパス

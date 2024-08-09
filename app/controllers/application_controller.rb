@@ -8,16 +8,16 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
    end
     
- # def after_sign_in_path_for(resource)
-    # case resource
-    # when Admin
-    #   admin_path
-    # when Customer
-    #   public_posts_path
-    # else
-    #   public_root_path
-    # end
- # end
+  def after_sign_in_path_for(resource)
+    case resource
+    when Admin
+      admin_customers_path
+    when Customer
+      public_posts_path
+    else
+      public_root_path
+    end
+  end
 
   def after_sign_out_path_for(resource)
     case resource
@@ -30,7 +30,13 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
+  # current_admin　nilのため追加
+  def current_admin
+    Rails.logger.debug "Current Admin session[:admin_id]: #{session[:admin_id]}"
+    @current_admin ||= Admin.find_by(id: session[:admin_id]) if session[:admin_id]
+    Rails.logger.debug "Current Admin: #{@current_admin.inspect}"
+    @current_admin
+  end
   
    protected
 
@@ -45,7 +51,7 @@ class ApplicationController < ActionController::Base
   
    def admin_signed_in?
     current_admin.present?
-  end
+   end
 
   def authenticate_admin!
     unless admin_signed_in?
