@@ -6,6 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# 管理者アカウントの作成
+Admin.find_or_create_by!(email: 'admin@admin') do |admin|
+  admin.password = 'password'
+  admin.password_confirmation = 'password'
+end
+
+
 
 olivia = Customer.find_or_create_by!(email: "olivia@example.com") do |customer|
   customer.name = "Olivia"
@@ -31,3 +38,4 @@ lucas = Customer.find_or_create_by!(email: "lucas@example.com") do |customer|
 end
 
 Post.create!(customer: lucas, content: "test",image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample3.jpg"), filename:"ssample3.jpg"))
+
