@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
 
+
   get 'searches/search'
   root 'public/homes#top'
   get '/search', to: 'searches#search'
+
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admins, controllers: {
@@ -26,8 +28,13 @@ Rails.application.routes.draw do
   end
   # 会員側のルーティング
   namespace :public do
+
      #aboutページ
+
     get '/about', to: 'homes#about'
+
+    
+
     # マイページ
     get 'mypage', to: 'customers#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
