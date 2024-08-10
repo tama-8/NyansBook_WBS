@@ -8,6 +8,7 @@ class Public::PostsController < ApplicationController
 
   def show
      @post = Post.find(params[:id])
+     @post_comment = PostComment.new
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "指定された投稿が見つかりません。"
     redirect_to public_posts_path

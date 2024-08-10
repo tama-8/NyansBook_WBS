@@ -6,7 +6,8 @@ class Customer < ApplicationRecord
          
          
    has_one_attached :image      
-  has_many :posts, dependent: :destroy
+   has_many :posts, dependent: :destroy
+   has_many :post_comments, dependent: :destroy
    #ゲストユーザー
    GUEST_USER_EMAIL = "guest@example.com"
 
@@ -29,6 +30,18 @@ class Customer < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename:  "no_image.jpg" , content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+  # 検索機能
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Customer.where(name: content)
+    elsif method == 'forward'
+      Customer.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      Customer.where('name LIKE ?', '%' + content)
+    else
+      Customer.where('name LIKE ?', '%' + content + '%')
+    end
   end
   #name 属性のバリデーションが追加
    validates :name, presence: true
