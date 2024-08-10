@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   # 管理側のルーティング
   namespace :admin do
      root to: 'customers#index' # ログイン後のリダイレクト先を会員一覧に設定
-    resources :customers, only: [:index, :show, :destroy]
+    resources :customers, only: [:index, :show, :destroy,:edit, :update]
     resources :posts, only: [:index, :show, :destroy, :edit, :update] do
       resources :post_comments, only:[:destory]
     end

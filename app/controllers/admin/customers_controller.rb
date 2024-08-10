@@ -1,5 +1,5 @@
 class Admin::CustomersController < ApplicationController
-    before_action :authenticate_admin
+    before_action :authenticate_admin!
     before_action :set_customer, only: [:show, :edit, :update, :destroy]
     
     def index
@@ -10,9 +10,12 @@ class Admin::CustomersController < ApplicationController
         end
     end
     
-    
     def show
         @customer = Customer.find(params[:id])
+    end
+    
+    def edit
+      
     end
     
     def destroy
@@ -35,13 +38,6 @@ class Admin::CustomersController < ApplicationController
      end
 
     private
-
-    def authenticate_admin!
-      Rails.logger.debug "Current Admin ID: #{session[:admin_id]}"
-      unless admin_signed_in?
-        redirect_to new_admin_session_path, alert: '管理者としてログインしてください'
-      end
-    end
     
     def set_customer
       @customer = Customer.find(params[:id])
