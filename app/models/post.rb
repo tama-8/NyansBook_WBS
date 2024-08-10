@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-    #ActiveStorage を使って画像を持たせる
+ #ActiveStorage を使って画像を持たせる
   has_one_attached :image
   has_many :post_comments, dependent: :destroy
   belongs_to :customer
@@ -24,7 +24,6 @@ def self.search_for(content, method)
   end
 end
 
- 
   validates :content, presence: true
   validates :image, presence: { message: 'を選択してください' }
 end
