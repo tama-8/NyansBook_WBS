@@ -38,5 +38,3 @@ class Admin::PostsController < ApplicationController
     params.require(:post).permit(:content, :image)
   end
 end
-    
-end
