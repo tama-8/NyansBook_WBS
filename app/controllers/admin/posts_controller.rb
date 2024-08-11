@@ -3,11 +3,14 @@ class Admin::PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:query].present?
-      @posts = Post.where("content LIKE ?", "%#{params[:query]}%").order(created_at: :desc)
-    else
-      @posts = Post.order(created_at: :desc).page(params[:page])
-    end
+      if params[:query].present?
+        @posts = Post.where("content LIKE ?", "%#{params[:query]}%")
+                     .order(created_at: :desc)
+                     .page(params[:page])
+                     .per(10) # ページごとの表示件数を指定
+      else
+        @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+      end
   end
   
   def show

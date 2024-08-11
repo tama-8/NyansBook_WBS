@@ -2,13 +2,16 @@ class Admin::CustomersController < ApplicationController
     before_action :authenticate_admin!
     before_action :set_customer, only: [:show, :edit, :update, :destroy]
     
-    def index
-        if params[:query].present?
-          @customers = Customer.where("name LIKE ? OR email LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%").page(params[:page])
-        else
-          @customers = Customer.page(params[:page])
-        end
-    end
+   def index
+      if params[:query].present?
+        @customers = Customer.where("name LIKE ? OR email LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+                             .order(created_at: :desc)
+                             .page(params[:page])
+                             .per(10) # ページごとの表示件数を指定
+      else
+        @customers = Customer.order(created_at: :desc).page(params[:page]).per(10)
+      end
+   end
     
     def show
         @customer = Customer.find(params[:id])
