@@ -15,6 +15,12 @@ class Admin::PostsController < ApplicationController
 
   def edit
   end
+  
+  def destroy
+      @post = Post.find(params[:id])
+      @post.destroy
+      redirect_to admin_posts_path, notice: '投稿が削除されました'
+  end
 
   def update
     if params[:post][:remove_image] == '1'
