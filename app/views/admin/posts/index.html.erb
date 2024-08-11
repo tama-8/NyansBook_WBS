@@ -1,39 +1,56 @@
-<h1>管理者側投稿一覧</h1>
-<!-- 検索フォーム -->
-<%= render 'search_form' %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>投稿者</th>
-      <th>画像</th>
-      <th>内容</th>
-      <th>投稿日時</th>
-      <th>アクション</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.id %></td>
-        <td><%= link_to post.customer.name, admin_customer_path(post.customer) %></td>
-        
-        <!-- 画像の表示 -->
-        <td>
-          <% if post.image.attached? %>
-            <%= image_tag post.image.variant(resize_to_limit: [100, 100]) %>
-          <% else %>
-            <p>No image</p>
-          <% end %>
-        </td>
+<div class="container">
+  <!-- タイトル -->
+  <div class="d-flex justify-content-start">
+    <h1 class="mt-4 ms-3">管理者側投稿一覧</h1>
+  </div>
 
-        <td><%= truncate(post.content, length: 50) %></td>
-        <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
-        <td>
-          <%= link_to '詳細', admin_post_path(post), class: 'btn btn-primary btn-sm' %>
-          <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <!-- 検索フォーム -->
+  <div class="ms-3">
+    <%= render 'search_form' %>
+  </div>
+
+  <!-- 投稿一覧テーブル -->
+  <div class="table-responsive ms-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>投稿者</th>
+          <th>画像</th>
+          <th>内容</th>
+          <th>投稿日時</th>
+          <th>アクション</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.id %></td>
+            <td><%= link_to post.customer.name, admin_customer_path(post.customer) %></td>
+            
+            <!-- 画像の表示 -->
+            <td>
+              <% if post.image.attached? %>
+                <%= image_tag post.image.variant(resize_to_limit: [100, 100]), class: "img-thumbnail" %>
+              <% else %>
+                <p>No image</p>
+              <% end %>
+            </td>
+
+            <td style="width: 200px; word-wrap: break-word;"><%= truncate(post.content, length: 50) %></td>
+            <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+            <td>
+              <%= link_to '詳細', admin_post_path(post), class: 'btn btn-primary btn-sm me-2' %>
+              <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ページネーション -->
+  <div class="ms-3">
+    <%= paginate @posts %>
+  </div>
+</div>
