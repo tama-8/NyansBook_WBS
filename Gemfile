@@ -67,3 +67,5 @@ gem "net-pop"
 gem "net-imap"
 # ページネーション追加
 gem 'kaminari'
+#画像のリサイズや変換、フォーマット変更など、さまざまな画像処理 追加
+gem 'mini_magick'
