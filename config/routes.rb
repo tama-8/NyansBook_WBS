@@ -28,13 +28,8 @@ Rails.application.routes.draw do
   end
   # 会員側のルーティング
   namespace :public do
-
      #aboutページ
-
     get '/about', to: 'homes#about'
-
-    
-
     # マイページ
     get 'mypage', to: 'customers#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
@@ -42,6 +37,7 @@ Rails.application.routes.draw do
     resources :customers,only: [:show, :edit, :update, :destroy]
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]do
       resources :post_comments, only: [:create,:destroy]
+      resource :favorite, only: [:create, :destroy]
     end
     resource :session, only: [:new, :create, :destroy]
     
