@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
 
+  namespace :public do
+    get 'relationships/create'
+    get 'relationships/destroy'
+  end
   get 'searches/search'
   root 'public/homes#top'
   get '/search', to: 'searches#search'
@@ -34,7 +38,11 @@ Rails.application.routes.draw do
     get 'mypage', to: 'customers#mypage', as: 'mypage'
     # ユーザー退会処理（ステータス更新）
     delete 'customers/withdraw', to: 'customers#withdraw', as: 'withdraw_customer'
-    resources :customers,only: [:show, :edit, :update, :destroy]
+    resources :customers,only: [:show, :edit, :update, :destroy]do
+       resource :relationships, only: [:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
+    end
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]do
       resources :post_comments, only: [:create,:destroy]
       resource :favorite, only: [:create, :destroy]

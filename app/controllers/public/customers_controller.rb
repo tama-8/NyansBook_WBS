@@ -4,9 +4,7 @@ module Public
     before_action :set_customer, only: [:show, :edit, :update, :destroy]
     before_action :ensure_guest_customer, only: [:edit, :update, :destroy]
     before_action :correct_customer, only: [:edit, :update]
-      
-      
-      
+
       def show
           @customer = Customer.find(params[:id])
           @posts = @customer.posts.order(created_at: :desc)  # 新規投稿順に並べ替え   

@@ -1,0 +1,6 @@
+<h2>Follow Customers</h2>
+<% if @customerss.exists? %>
+  <%= render '/customers/index', customers: @customers %>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>
