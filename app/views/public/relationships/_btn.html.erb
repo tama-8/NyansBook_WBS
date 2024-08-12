@@ -1,0 +1,19 @@
+  <div class="d-flex mb-0 align-items-center">
+          <div class="mr-4">
+            <span>フォロー:</span>
+            <span style="font-weight: bold; margin-left: 5px;"><%= customer.followings.count %></span>
+          </div>
+          <div class="mr-4">
+            <span>フォロワー:</span>
+            <span style="font-weight: bold; margin-left: 5px;"><%= customer.followers.count %></span>
+          </div>
+          <div>
+            <% if current_customer != customer %>
+              <% if current_customer.following?(customer) %>
+                <%= link_to "フォロー外す", public_customer_relationships_path(customer.id), method: :delete,  remote: true, id: 'unfollow_button',class: "btn btn-outline-danger btn-sm", style: "font-size: 12px; padding: 2px 6px;" %>
+              <% else %>
+                <%= link_to "フォローする", public_customer_relationships_path(customer), method: :customer, remote: true, id: 'follow_button', class: "btn btn-outline-primary btn-sm", style: "font-size: 12px; padding: 2px 6px;" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>

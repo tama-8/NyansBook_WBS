@@ -8,10 +8,23 @@ class Customer < ApplicationRecord
    has_many :posts, dependent: :destroy
    has_many :post_comments, dependent: :destroy
    has_many :favorites, dependent: :destroy
-   has_many :favorited_posts, through: :favorites, source: :post
   
+  # 自分がフォローされる（被フォロー）側の関係性
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # 被フォロー関係を通じて参照→自分をフォローしている人
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+  
+  # 自分がフォローする（与フォロー）側の関係性
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # 与フォロー関係を通じて参照→自分がフォローしている人
+  has_many :followings, through: :relationships, source: :followed
    #ゲストユーザー
    GUEST_USER_EMAIL = "guest@example.com"
+   #name 属性のバリデーションが追加
+   validates :name, presence: true
+   validates :email, presence: true, uniqueness: true
+    # カスタムバリデーション
+   validates :password, presence: true, confirmation: true, if: :password_required?
 
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |customer|
@@ -45,12 +58,20 @@ class Customer < ApplicationRecord
       Customer.where('name LIKE ?', '%' + content + '%')
     end
   end
-  #name 属性のバリデーションが追加
-   validates :name, presence: true
-   validates :email, presence: true, uniqueness: true
-    # カスタムバリデーション
-   validates :password, presence: true, confirmation: true, if: :password_required?
+  #フォロー機能
+  def follow(customer)
+    relationships.create(followed_id: customer.id)
+  end
 
+  def unfollow(customer)
+    relationships.find_by(followed_id: customer.id).destroy
+  end
+
+  def following?(customer)
+    followings.include?(customer)
+  end
+
+  
   private
   
     def password_required?
