@@ -7,23 +7,20 @@ class Customer < ApplicationRecord
   has_one_attached :image      
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
-
   # 自分がフォローする（与フォロー）側の関係性
   has_many :active_relationships, class_name: "Relationship",
                                    foreign_key: "follower_id",
                                    dependent: :destroy
-
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :following, through: :active_relationships, source: :followed
-  
   # 自分がフォローされる（被フォロー）側の関係性
   has_many :passive_relationships, class_name: "Relationship",
                                    foreign_key: "followed_id",
                                    dependent: :destroy
-
   # 被フォロー関係を通じて参照→自分をフォローしている人
   has_many :followers, through: :passive_relationships, source: :follower
-
+  has_many :customer_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy  
   # ゲストユーザー
   GUEST_USER_EMAIL = "guest@example.com"
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  # get 'chats/show'
   get 'searches/search'
   root 'public/homes#top'
   get '/search', to: 'searches#search'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
 # ゲストユーザー
   devise_scope :customer do
-      post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in', as: :customers_guest_sign_in
+    post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in', as: :customers_guest_sign_in
   end
   # 会員側のルーティング
   namespace :public do
@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get '/about', to: 'homes#about'
     # マイページ
     get 'mypage', to: 'customers#mypage', as: 'mypage'
+    # #チャット
+    # get 'chat/:id', to: 'chats#show', as: 'chat'
     # ユーザー退会処理（ステータス更新）
     delete 'customers/withdraw', to: 'customers#withdraw', as: 'withdraw_customer'
     resources :customers, only: [:show, :edit, :update, :destroy]do
@@ -42,15 +44,16 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create,:destroy]
       resource :favorite,       only: [:create, :destroy]
     end
+    resources :chats, only: [:create, :show, :destroy] do
+      delete :destroy_all, on: :collection
+    end
     resource :session,          only: [:new, :create, :destroy]
     resources :relationships,   only: [:create, :destroy]
   end
 
-
-
   # 管理側のルーティング
   namespace :admin do
-     root to: 'customers#index' # ログイン後のリダイレクト先を会員一覧に設定
+    root to: 'customers#index' # ログイン後のリダイレクト先を会員一覧に設定
     resources :customers,     only: [:index, :show, :destroy,:edit, :update]
     resources :posts,         only: [:index, :show, :destroy, :edit, :update] 
     resources :post_comments, only:[:index,:destroy]
