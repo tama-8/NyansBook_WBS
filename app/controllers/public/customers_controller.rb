@@ -8,7 +8,8 @@ module Public
     
 
     def show
-      @posts = @customer.posts.order(created_at: :desc)  # 新規投稿順に並べ替え   
+      @posts = @customer.posts.order(created_at: :desc)  # 新規投稿順に並べ替え
+      @customer = Customer.find(params[:id])
     end
     
     def mypage 
