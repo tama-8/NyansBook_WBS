@@ -69,3 +69,5 @@ gem "net-imap"
 gem 'kaminari'
 #画像のリサイズや変換、フォーマット変更など、さまざまな画像処理 追加
 gem 'mini_magick'
+#Turboを利用するため追加
+# gem 'turbo-rails'
