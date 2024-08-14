@@ -19,6 +19,11 @@
             <% end %>
           </li>
           <li>
+            <%=  link_to admin_post_comments_path,class: 'nav-link text-light' do %>
+             <i class="fa-regular fa-image"></i> Comment List
+            <% end %>
+          </li>
+          <li>
             <%= link_to  destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i> logout
             <% end %>

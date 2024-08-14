@@ -6,5 +6,9 @@ class CreateRelationships < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    #2回以上フォローできないようにします
+     add_index :relationships, :follower_id
+     add_index :relationships, :followed_id
+     add_index :relationships, [:follower_id, :followed_id], unique: true
   end
 end
