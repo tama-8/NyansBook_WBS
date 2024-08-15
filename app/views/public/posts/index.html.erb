@@ -10,7 +10,7 @@
   <div class="row w-100">
     <% @posts.each do |post| %>
       <div id="post_<%= post.id %>" class="col-md-4 mb-4 d-flex justify-content-center">
-        <div class="card" style="width: 18rem; height: 400px;">
+        <div class="card" style="width: 18rem; height: 430px;">
           <%= link_to public_post_path(post) do %>
             <% if post.image.attached? %>
               <%= image_tag post.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
@@ -38,7 +38,19 @@
               <!--いいね-->
               <p id="post_<%= post.id %>favorite-btn"><%= render "public/favorites/favorite-btn", post: post %></p>
               <!-- コメント件数 -->
-              <p class="text-muted mb-0 ml-2"><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></p>
+              <p class="text-muted mb-0 ml-2"></p>
+                <%= link_to public_post_path(post.id) do %>
+                  <i class="fa-solid fa-comment"></i> <%= post.post_comments.count %>
+                <% end %>
+              </p>
+              <!-- チャット -->
+              <p class="mb-0">
+              <% if current_customer != post.customer && current_customer.following?(post.customer) && post.customer.following?(current_customer) %>
+                <%= link_to public_chat_path(post.customer.id), class: "ml-2" do %>
+                  <i class="fa-regular fa-paper-plane"></i> 
+                <% end %>
+              <% end %>
+              </p>
             </div>
             <!-- 説明文章をトリミング -->
             <p class="card-text"><%= truncate(post.content, length: 100) %></p>

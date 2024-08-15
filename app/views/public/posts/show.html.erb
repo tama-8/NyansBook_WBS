@@ -25,17 +25,39 @@
             <% end %>
             <!--ユーザーネーム-->
             <p class="mb-0"style="font-weight: bold;"><%= @post.customer.name %></p>
-              <div class="d-flex align-items-center mb-3">
+          <div class="d-flex align-items-center mb-3">
              <p>説明：<%= @post.content %></p>
           </div>
+           <div class="d-flex">
+              <!-- 投稿日時表記 -->
+              <p class="mb-0"><%= time_ago_in_japanese(@post.created_at) %></p>
+              <!--いいね-->
+              <p id="post_<%= @post.id %>favorite-btn"><%= render "public/favorites/favorite-btn", post: @post %></p>
+              <!-- コメント件数 -->
+              <p class="text-muted mb-0 ml-2"></p>
+                <%= link_to public_post_path(@post.id) do %>
+                  <i class="fa-solid fa-comment"></i> <%= @post.post_comments.count %>
+                <% end %>
+              </p>
+              <!-- チャット -->
+              <p class="mb-0">
+              <% if current_customer != @post.customer && current_customer.following?(@post.customer) && @post.customer.following?(current_customer) %>
+                <%= link_to public_chat_path(@post.customer.id), class: "ml-2" do %>
+                  <i class="fa-regular fa-paper-plane"></i> 
+                <% end %>
+              <% end %>
+              </p>
+            </div>
           <% if @post.customer == current_customer %>
             <%= link_to '編集', edit_public_post_path(@post), class: 'btn btn-primary' %>
             <%= link_to '削除', public_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
           <% end %>
-          <%= link_to '戻る', public_post_path(@post), class: 'btn btn-secondary' %>
-        </div>
-          <!-- コメント機能 -->
-          <%= render 'public/post_comments/index' %>
+          <%= link_to '戻る', public_posts_path(@post), class: 'btn btn-secondary' %>
+        </div >
+         <!-- コメント機能 -->
+          <div id="post_<%= @post.id %>_comments">
+            <%= render 'public/post_comments/index', post: @post %>
+          </div>
       </div>
     </div>
   </div>

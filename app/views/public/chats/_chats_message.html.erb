@@ -8,7 +8,7 @@
     <div class="message-text">
       <p><%= chat.message %></p>
       <% if chat.customer == current_customer %>
-        <%= link_to '削除', public_chat_path(chat,chat_user_id: chat.customer_id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm delete-btn' %>
+        <%= link_to '削除', public_chat_path(chat.id,chat_user_id: chat.customer_id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm delete-btn' %>
       <% end %>
     </div>
   </div>
