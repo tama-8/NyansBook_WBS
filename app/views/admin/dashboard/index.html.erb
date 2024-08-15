@@ -1,0 +1,52 @@
+<h1 class="text-center my-4">ダッシュボード</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="statistics card mb-4">
+        <div class="card-header">
+          <h2 class="card-title text-center">統計情報</h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <tr><td>総ユーザー数</td><td><%= @total_customers %></td></tr>
+            <tr><td>今日の新規ユーザー</td><td><%= @new_customers_today %></td></tr>
+            <tr><td>総投稿数</td><td><%= @total_posts %></td></tr>
+            <tr><td>総コメント数</td><td><%= @total_comments %></td></tr>
+            <tr><td>総いいね数</td><td><%= @total_likes %></td></tr>
+            <tr><td>総フォロー数</td><td><%= @total_follows %></td></tr>
+            <!--<tr><td>総通報数:</td><td><%#= @total_reports %></td></tr>-->
+          </table>
+        </div>
+      </div>
+
+      <div class="recent-activity card">
+        <div class="card-header">
+          <h2 class="card-title text-center">最近の活動</h2>
+        </div>
+        <div class="card-body">
+          <h3 class="h5">新規ユーザー</h3>
+          <table class="table table-bordered">
+            <% @recent_customers.each do |customer| %>
+              <tr><td><%= customer.name %></td><td><%= customer.created_at.strftime('%Y-%m-%d %H:%M') %></td></tr>
+            <% end %>
+          </table>
+          
+          <h3 class="h5">新規投稿</h3>
+          <table class="table table-bordered">
+            <% @recent_posts.each do |post| %>
+              <tr><td><%= link_to post.content.truncate(30), admin_post_path(post) %></td><td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td></tr>
+            <% end %>
+          </table>
+          
+          <h3 class="h5">新規コメント</h3>
+          <table class="table table-bordered">
+            <% @recent_comments.each do |comment| %>
+              <tr><td><%= comment.comment.truncate(30) %></td><td><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></td></tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
