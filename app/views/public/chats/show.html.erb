@@ -5,7 +5,9 @@
             <h2 class="text-center">CHAT WITH <%= @customer.name %></h2>
              <!-- 2. すべてのメッセージ削除ボタン -->
             <div class="text-center mb-3">
-                <%= link_to '全てのメッセージを削除', destroy_all_public_chats_path(room_id: @chat.room_id,chat_user_id: @customer.id), method: :delete, data: { confirm: '本当に全てのメッセージを削除しますか？' }, class: 'btn btn-danger' %>
+              <%= form_with url: destroy_all_public_chats_path(room_id: @chat.room_id, chat_user_id: @customer.id), method: :delete, local: false, class: 'd-inline' do %>
+                <%= submit_tag '全てのメッセージを削除', class: 'btn btn-danger', data: { confirm: '本当に全てのメッセージを削除しますか？' } %>
+              <% end %>
             </div>
             <!-- 3. テーブル (ユーザー名の表示) -->
             <div class="d-flex justify-content-between mb-3">
@@ -13,9 +15,9 @@
                 <div class="font-weight-bold" style="font-size: 20px;"><%= @customer.name %></div>
             </div>
                <!-- 4. メッセージ表示 -->
-              <tbody id="message_tbody">
+              <div id="message_tbody">
                <%=render "public/chats/chats_message",chats: @chats %>
-              </tbody>
+              </div>
                <!-- 5. メッセージ送信フォーム -->
             </table>
                <%= form_with model: @chat, url: @chat.new_record? ? public_chats_path : public_chat_path(@chat), local: false do |f| %>
