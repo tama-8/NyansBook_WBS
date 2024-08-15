@@ -4,3 +4,7 @@ $("#message_tbody").html("<%= j(render 'public/chats/chats_message',  chats: @ch
 // フォームをクリア
 $('.chat-btn').closest('form').find('input[type="text"]').val('');
 
+// フラッシュメッセージを表示
+<% if flash[:notice] %>
+  alert("<%= flash[:notice] %>");
+<% end %>

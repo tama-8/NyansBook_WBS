@@ -23,26 +23,25 @@ class Public::ChatsController < ApplicationController
     @chat = current_customer.chats.new(chat_params)
     @chat.save
     @chats = @chat.room.chats
+    render 'public/chats/chats_toggle.js.erb'
   end
   
-   def destroy
+  def destroy
     @chat = current_customer.chats.find(params[:id])
     @chat.destroy
-    # binding.pry
     @room = @chat.room
     @chats = @room.chats # `@chats` 変数を初期化して、ビューに渡す
     @customer = Customer.find(params[:chat_user_id])
-    render :show
-    
-    #redirect_to public_chat_path(@chat.room_id), notice: 'メッセージが削除されました'
+    render 'public/chats/chats_toggle.js.erb'
+    # redirect_to public_chat_path(@chat.room_id), notice: 'メッセージが削除されました'
   end
 
   def destroy_all
     current_customer.chats.where(room_id: params[:room_id]).destroy_all
-    # binding.pry
-    @customer = Customer.find(params[:chat_user_id])
-    render :show
-    ##redirect_to public_chat_path(params[:room_id]), notice: '全てのメッセージが削除されました'
+    # chats変数の再設定
+    @chats = current_customer.chats.where(room_id: params[:room_id]) 
+    render 'public/chats/chats_toggle.js.erb'
+    # redirect_to public_chat_path(params[:room_id]), notice: '全てのメッセージが削除されました'
   end
 
   private
