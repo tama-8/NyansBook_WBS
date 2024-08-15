@@ -1,7 +1,7 @@
 <!-- コメントセクション -->
 <div class="card mt-4" style="border: none; box-shadow: none;">
   <div class="card-body">
-    <h5>コメント件数：<%= @post.post_comments.count %></h5>
+    <!--<h5>コメント件数：<%#= @post.post_comments.count %></h5>-->
     <% @post.post_comments.each do |post_comment| %>
       <div class="d-flex align-items-start mb-3">
         <%= image_tag post_comment.customer.get_profile_image(30,30), class: "rounded-circle mr-3" %>

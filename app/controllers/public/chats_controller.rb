@@ -5,20 +5,20 @@ class Public::ChatsController < ApplicationController
     @customer = Customer.find(params[:id])
     rooms = current_customer.customer_rooms.pluck(:room_id)
     customer_rooms = CustomerRoom.find_by(customer_id: @customer.id, room_id: rooms)
-
-    unless customer_rooms.nil?
-      @room = customer_rooms.room
-    else
-      @room = Room.new
-      @room.save
-      CustomerRoom.create(customer_id: current_customer.id, room_id: @room.id)
-      CustomerRoom.create(customer_id: @customer.id, room_id: @room.id)
-    end
-    @chats = @room.chats
-    @chat = Chat.new(room_id: @room.id)
+   
+  unless customer_rooms.nil?
+    @room = customer_rooms.room
+  else
+    @room = Room.new
+    @room.save
+    CustomerRoom.create(customer_id: current_customer.id, room_id: @room.id)
+    CustomerRoom.create(customer_id: @customer.id, room_id: @room.id)
+　 end
+   @chats = @room.chats
+   @chat = Chat.new(room_id: @room.id)
+    # binding.pry # ここで処理が一時停止します
   end
-  
-
+ 
   def create
     @chat = current_customer.chats.new(chat_params)
     @chat.save
@@ -29,6 +29,8 @@ class Public::ChatsController < ApplicationController
     @chat = current_customer.chats.find(params[:id])
     @chat.destroy
     # binding.pry
+    @room = @chat.room
+    @chats = @room.chats # `@chats` 変数を初期化して、ビューに渡す
     @customer = Customer.find(params[:chat_user_id])
     render :show
     
