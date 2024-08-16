@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'reports/index'
+  end
   # get 'chats/show'
   get 'searches/search'
   root 'public/homes#top'
@@ -68,5 +71,12 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :destroy,:edit, :update]
     resources :posts, only: [:index, :show, :destroy, :edit, :update] 
     resources :post_comments, only:[:index,:destroy]
+    resources :reports, only: [:index, :show, :destroy] do
+    member do
+      delete :delete_content
+      patch :ignore
+      patch :toggle
+    end
+   end
   end
 end
