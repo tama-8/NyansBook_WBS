@@ -21,6 +21,10 @@ class Customer < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :customer_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy  
+  # チャット通知
+  has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
+
   # ゲストユーザー
   GUEST_USER_EMAIL = "guest@example.com"
 

@@ -56,6 +56,14 @@
             <% end %>
           </li>
           <li>
+            <%= link_to public_notifications_path, class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-bell"></i> 通知
+              <% if @unread_notifications_count > 0 %>
+                <span class="badge badge-danger"><%= @unread_notifications_count %></span>
+              <% end %>
+            <% end %>
+          </li>
+          <li>
             <%= link_to destroy_customer_session_path, method: :delete,class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i> logout
             <% end %>
