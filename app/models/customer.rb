@@ -24,7 +24,9 @@ class Customer < ApplicationRecord
   # チャット通知
   has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy
   has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
-
+  #通報
+  has_many :reporter, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
+  has_many :reported, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
   # ゲストユーザー
   GUEST_USER_EMAIL = "guest@example.com"
 

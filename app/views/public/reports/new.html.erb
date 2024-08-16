@@ -1,0 +1,25 @@
+<h1>通報フォーム</h1>
+
+<%= form_with(model: @report, url: public_reports_path, local: true) do |f| %>
+  <%= f.hidden_field :content_id %>
+  <%= f.hidden_field :content_type %>
+
+  <div class="field">
+  <%= f.label :reason %>
+  <%= f.select :reason, Report.reasons.keys.map { |reason| [I18n.t("enums.report.reason.#{reason}"), reason] }, prompt: "理由を選択してください" %>
+</div>
+
+  <div class="actions">
+    <%= f.submit "通報する" %>
+  </div>
+<% end %>
+<% if @report.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+    <ul>
+      <% @report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     end
     resource :session, only: [:new, :create, :destroy]
     resources :relationships, only: [:create, :destroy]
+    resources :reports, only: [:new, :create]
   end
 
   # 管理側のルーティング
