@@ -11,20 +11,22 @@
           <p><%= post_comment.comment %></p>
           
           <% if post_comment.customer == current_customer %>
-          <div class="d-flex align-items-center">
-              <%= form_with url: public_post_post_comment_path(post_comment.post, post_comment), method: :delete, local: false do %>
-                <%= submit_tag '削除', data: { confirm: '本当に削除しますか？' } %>
-              <% end %>
-                <!-- 通報リンクを削除ボタンの右横に追加 -->
-              <%= link_to new_public_report_path(content_id: post_comment.id, content_type: 'PostComment'), method: :get, class: 'report-link' do %>
-  <i class="fa-solid fa-triangle-exclamation"></i> 通報する
-<% end %>
+              <div class="d-flex align-items-center">
+                <%= form_with url: public_post_post_comment_path(post_comment.post, post_comment), method: :delete, local: false do %>
+                  <%= submit_tag '削除', data: { confirm: '本当に削除しますか？' } %>
+                <% end %>
             </div>
           <% end %>
         </div>
+          <!-- 通報リンクを削除ボタンの右横に追加 -->
+        <%= link_to new_public_report_path(content_id: post_comment.id, content_type: 'PostComment'), method: :get, class: 'report-link' do %>
+           <i class="fa-solid fa-triangle-exclamation"></i> 通報する
+        <% end %>
       </div>
+    
     <% end %>
   </div>
+    
 </div>
 
 <!-- コメント投稿フォーム -->

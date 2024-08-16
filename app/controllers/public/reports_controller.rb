@@ -6,20 +6,31 @@ class Public::ReportsController < ApplicationController
   end
 
   def create
-  @report = Report.new(report_params)
-  @report.reporter = current_customer # ログインしている顧客を通報者として設定
+    @report = Report.new(report_params)
+    @report.reporter = current_customer
 
-  # 通報対象のコメントの投稿者を通報される人として設定
-  post_comment = PostComment.find(@report.content_id)
-  @report.reported = post_comment.customer
-  
-  if @report.save
-    redirect_to public_post_path(@report.content.post), notice: '通報が送信されました。'
-  else
-    Rails.logger.debug @report.errors.full_messages
-    render :new
+    # content_type に基づいて対応するモデルを動的に検索
+    if @report.content_type == 'PostComment'
+      content = PostComment.find_by(id: @report.content_id)
+    else
+      content = nil
+    end
+
+    if content.present?
+      # 通報対象のコメントの投稿者を通報される人として設定
+      @report.reported = content.customer
+    else
+      flash[:alert] = "通報対象のコンテンツが見つかりませんでした。"
+      render :new
+      return
+    end
+
+    if @report.save
+      redirect_to public_post_path(content.post), notice: '通報が送信されました。'
+    else
+      render :new
+    end
   end
-end
 
   private
 

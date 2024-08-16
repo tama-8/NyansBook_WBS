@@ -28,6 +28,19 @@
              <i class="fa-regular fa-image"></i> Comment List
             <% end %>
           </li>
+          <% if admin_signed_in? %>
+            <ul class="nav">
+              <li class="nav-item">
+                <%= link_to admin_reports_path, class: 'nav-link position-relative' do %>
+                  <i class="fa-solid fa-bell"></i>
+                  <% unread_reports_count = Report.where(is_checked: false).count %>
+                  <% if unread_reports_count > 0 %>
+                    <span class="badge badge-danger position-absolute" style="top: -5px; right: -5px;"><%= unread_reports_count %></span>
+                  <% end %>
+                <% end %>
+              </li>
+            </ul>
+          <% end %>
           <li>
             <%= link_to  destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i> logout
