@@ -1,0 +1,22 @@
+<!--既読にした通知はそのままDBに残りますが、表示には含まれない-->
+<div class="container d-flex flex-column align-items-center min-vh-100">
+  <h1 class="mt-5">通知一覧</h1>
+
+  <% if @unread_notifications_count > 0 %>
+    <p>未読通知が <%= @unread_notifications_count %> 件あります。</p>
+  <% else %>
+    <p>未読通知はありません。</p>
+  <% end %>
+
+ <div class="w-50">
+  <% @notifications.where(read: false).each do |notification| %>
+    <div class="notification my-3 p-3 border rounded bg-light">
+      <% sender_name = notification.chat.customer.name %>  <!-- 送信者の名前を取得 -->
+      <%= link_to "#{sender_name}さんからのチャット通知", public_chat_path(notification.chat) %>
+      <span class="status text-danger">未読</span>
+      <%= link_to "既読にする", mark_as_read_public_notification_path(notification), method: :patch, class: "btn btn-sm btn-primary ml-3" %>
+    </div>
+  <% end %>
+ </div>
+</div>
+
