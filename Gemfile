@@ -72,3 +72,5 @@ gem 'kaminari'
 gem 'mini_magick'
 #Turboを利用するため追加
 # gem 'turbo-rails'
+gem 'enum_help'
+gem 'rails-i18n'
