@@ -17,6 +17,8 @@
         </div>
         <p><strong>内容:</strong></p>
         <p><%= @post.content %></p>
+         <!-- コメント機能 -->
+          <%= render 'public/post_comments/index' %>
         <!-- アクションボタン -->
         <div class="mt-4">
           <%= link_to '戻る', admin_posts_path(@post), class: 'btn btn-secondary' %>
