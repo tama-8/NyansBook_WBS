@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :post_comments, dependent: :destroy
   belongs_to :customer
+  has_many :favorites, dependent: :destroy
+  has_many :week_favorites, -> { where(created_at: ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day)) }, class_name: 'Favorite'
   
    def get_image
     unless image.attached?
@@ -23,6 +25,10 @@ def self.search_for(content, method)
     Post.where('content LIKE ?', '%' + content + '%')
   end
 end
+#いいね機能
+  def favorited_by?(customer)
+    favorites.where(customer_id: customer.id).exists?
+  end
 
   validates :content, presence: true
   validates :image, presence: { message: 'を選択してください' }
