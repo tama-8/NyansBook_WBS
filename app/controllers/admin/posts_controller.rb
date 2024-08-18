@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
     before_action :authenticate_admin!
-    before_action :set_post, only: [:show, :edit, :update, :destroy]
+    before_action :set_post, only: [:edit, :update, :destroy]
 
   def index
       if params[:query].present?
@@ -14,6 +14,7 @@ class Admin::PostsController < ApplicationController
   end
   
   def show
+    @post = Post.find(params[:id])
   end
 
   def edit

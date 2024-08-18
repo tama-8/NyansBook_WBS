@@ -1,36 +1,41 @@
 class Public::ReportsController < ApplicationController
-    before_action :authenticate_customer!
+  before_action :authenticate_customer!
 
   def new
-      @report = Report.new(content_id: params[:content_id], content_type: 'PostComment')
+    content_type = params[:content_type].underscore
+    @report = Report.new(content_id: params[:content_id], content_type: content_type)
   end
 
   def create
-    @report = Report.new(report_params)
-    @report.reporter = current_customer
+  @report = Report.new(report_params)
+  @report.reporter_id = current_customer.id
 
-    # content_type に基づいて対応するモデルを動的に検索
-    if @report.content_type == 'PostComment'
-      content = PostComment.find_by(id: @report.content_id)
-    else
-      content = nil
-    end
+  # content_typeとcontent_idから対応するオブジェクトを取得
+  content = case @report.content_type
+            when 'PostComment'
+              PostComment.find_by(id: @report.content_id)
+            when 'Post'
+              Post.find_by(id: @report.content_id)
+            else
+              nil
+            end
 
-    if content.present?
-      # 通報対象のコメントの投稿者を通報される人として設定
-      @report.reported = content.customer
-    else
-      flash[:alert] = "通報対象のコンテンツが見つかりませんでした。"
-      render :new
-      return
-    end
-
-    if @report.save
-      redirect_to public_post_path(content.post), notice: '通報が送信されました。'
-    else
-      render :new
-    end
+  if content.nil?
+    flash[:alert] = "指定されたコンテンツが見つかりませんでした。"
+    render :new
+    return
   end
+
+  @report.reported_id = content.customer_id
+
+  if @report.save
+    redirect_to public_post_path(content.is_a?(PostComment) ? content.post : content), notice: '通報が送信されました。'
+  else
+    render :new
+  end
+
+end
+
 
   private
 
@@ -38,4 +43,3 @@ class Public::ReportsController < ApplicationController
     params.require(:report).permit(:reporter_id, :reported_id, :content_id, :content_type, :reason)
   end
 end
-

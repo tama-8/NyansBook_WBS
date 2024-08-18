@@ -1,0 +1,18 @@
+ja:
+  devise:
+    sessions:
+      admin:
+        signed_in: "管理者としてサインインしました"
+        signed_out: "管理者としてサインアウトしました"
+      signed_in: "サインインしました"
+      signed_out: "サインアウトしました"
+    
+    registrations:
+      customer:
+        signed_up: "顧客としてサインアップが完了しました"
+      signed_up: "サインアップが完了しました"
+    
+    sessions:
+      customer:
+        signed_out: "顧客としてサインアウトしました"
+      signed_out: "サインアウトしました"
