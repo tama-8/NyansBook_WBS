@@ -18,7 +18,8 @@ class Public::ChatsController < ApplicationController
   # @chat = Chat.new(room_id: @room.id)
   #   # binding.pry # ここで処理が一時停止します
   # end
- def show
+  def show
+  # byebug
   case params[:source]
   when 'notification'
     chat = Chat.find(params[:id])  # `params[:id]` が Chat の ID であると仮定
@@ -46,7 +47,7 @@ class Public::ChatsController < ApplicationController
 
   @chats = @room.chats
   @chat = Chat.new(room_id: @room.id)
-end
+  end
  
   def create
     @chat = current_customer.chats.new(chat_params)

@@ -12,7 +12,7 @@
   <% @notifications.where(read: false).each do |notification| %>
     <div class="notification my-3 p-3 border rounded bg-light">
       <% sender_name = notification.chat.customer.name %>  <!-- 送信者の名前を取得 -->
-      <%= link_to "#{sender_name}さんからのチャット通知", public_chat_path(notification.chat) %>
+      <%= link_to "#{sender_name}さんからのチャット通知", public_chat_path(notification.chat, source: 'notification') %>
       <span class="status text-danger">未読</span>
       <%= link_to "既読にする", mark_as_read_public_notification_path(notification), method: :patch, class: "btn btn-sm btn-primary ml-3" %>
     </div>
