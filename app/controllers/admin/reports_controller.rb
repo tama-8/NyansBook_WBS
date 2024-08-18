@@ -2,9 +2,6 @@ class Admin::ReportsController < ApplicationController
    before_action :authenticate_admin!
    
   def index
-    # @reports = Report.includes(:reporter, :reported, :content)
-    #                 .where.not(content_id: nil) # コンテンツが存在するものだけを表示
-    #                 .order(created_at: :desc)
     @reports = Report.all
   end
   

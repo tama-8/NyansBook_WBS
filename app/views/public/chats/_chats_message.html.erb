@@ -2,7 +2,11 @@
     <% chats.each do |chat| %>
     <div class="message-content <%= chat.customer_id == current_customer.id ? 'message-left' : 'message-right' %>">
     <div class="message-photo">
-      <%= image_tag(chat.customer_id == current_customer.id ? (current_customer.image.present? ? current_customer.image : 'no_image.png') : (chat.customer.image.present? ? chat.customer.image : 'no_image.png'), class: "customer-photo") %>
+      <%= image_tag(
+                  chat.customer_id == current_customer.id ? 
+                  (current_customer.image.attached? ? current_customer.image : 'no_image.png') : 
+                  (chat.customer.image.attached? ? chat.customer.image : 'no_image.png'), 
+                  class: "customer-photo") %>
     </div>
     <div class="message-text">
       <p><%= chat.message %></p>
