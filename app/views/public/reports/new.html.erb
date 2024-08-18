@@ -2,19 +2,19 @@
 
 <div style="display: flex; justify-content: center;">
   <div style="width: 100%; max-width: 500px;">
-    <%= form_with(model: @report, url: public_reports_path, local: true) do |f| %>
+   <%= form_with(model: @report, url: public_reports_path, local: true) do |f| %>
   <%= f.hidden_field :content_id, value: @report.content_id %>
-  <%= f.hidden_field :content_type, value: 'post_comment' %> 
+  <%= f.hidden_field :content_type, value: @report.content_type %> 
 
-      <div class="field" style="margin-left: 120px; margin-top: 20px;">
-        <%= f.label :reason %>
-        <%= f.select :reason, Report.reasons.keys.map { |reason| [I18n.t("enums.report.reason.#{reason}"), reason] }, prompt: "理由を選択してください" %>
-      </div>
+  <div class="field" style="margin-left: 120px; margin-top: 20px;">
+    <%= f.label :reason %>
+    <%= f.select :reason, Report.reasons.keys.map { |reason| [I18n.t("enums.report.reason.#{reason}"), reason] }, prompt: "理由を選択してください" %>
+  </div>
 
-      <div class="actions" style="text-align: center; margin-top: 20px;">
-        <%= f.submit "通報する" %>
-      </div>
-    <% end %>
+  <div class="actions" style="text-align: center; margin-top: 20px;">
+    <%= f.submit "通報する" %>
+  </div>
+<% end %>
 
     <% if @report.errors.any? %>
       <div id="error_explanation">

@@ -2,11 +2,11 @@ class Public::ReportsController < ApplicationController
   before_action :authenticate_customer!
 
   def new
-    content_type = params[:content_type].underscore
-    @report = Report.new(content_id: params[:content_id], content_type: content_type)
+    @report = Report.new(content_id: params[:content_id], content_type: params[:content_type])
   end
 
   def create
+     Rails.logger.debug "Params: #{params.inspect}"
   @report = Report.new(report_params)
   @report.reporter_id = current_customer.id
 
