@@ -35,15 +35,9 @@ class Admin::ReportsController < ApplicationController
   end
   
   def toggle
-    @report = Report.find(params[:id])
-    if @report.content
-      @report.update(is_checked: !@report.is_checked)
-      notice_message = '通報の確認状態が更新されました。'
-    else
-      @report.destroy
-      notice_message = '通報は削除されました。コンテンツは既に存在しませんでした。'
-    end
-  
-    redirect_to admin_reports_path, notice: notice_message
+    report = Report.find(params[:id])
+    report.update(is_checked: !report.is_checked)
+    redirect_to admin_reports_path, notice: '通報が更新されました。'
   end
+
 end
