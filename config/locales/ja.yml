@@ -8,3 +8,10 @@ ja:
         commercial_purposes: 商業目的
         spam: スパム
         other: その他
+        
+  errors:
+    messages:
+      not_saved:
+        one: "1つのエラーのために保存できませんでした"
+        other: "%{count}つのエラーのために保存できませんでした"
+        

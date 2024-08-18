@@ -14,6 +14,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+  
+  def after_sign_up_path_for(resource)
+       public_customer_path(resource)
+  end
 
   def after_update_path_for(resource)
     # アカウント更新後にリダイレクトするパス

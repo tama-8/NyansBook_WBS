@@ -47,6 +47,12 @@
                 <% end %>
               <% end %>
               </p>
+              <!-- 通報リンクを削除ボタンの右横に追加 -->
+              <p>
+                <%= link_to new_public_report_path(content_id: @post, content_type: 'Post'), method: :get, class: 'report-link' do %>
+                   <i class="fa-solid fa-triangle-exclamation"></i> 通報する
+                <% end %>
+              </p>
             </div>
           <% if @post.customer == current_customer %>
             <%= link_to '編集', edit_public_post_path(@post), class: 'btn btn-primary' %>
