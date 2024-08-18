@@ -18,25 +18,28 @@ class Public::ChatsController < ApplicationController
   # @chat = Chat.new(room_id: @room.id)
   #   # binding.pry # ここで処理が一時停止します
   # end
-def show
-  @chat = Chat.find(params[:id])
-  rooms = current_customer.customer_rooms.pluck(:room_id)
-  customer_rooms = CustomerRoom.find_by(customer_id: @customer.id, room_id: rooms)
-  @customer = @chat.customer
-
-  if @customer.nil?
-    redirect_to public_customer_path(current_customer), alert: '該当する顧客が見つかりませんでした。'
-    return
+ def show
+  case params[:source]
+  when 'notification'
+    chat = Chat.find(params[:id])  # `params[:id]` が Chat の ID であると仮定
+    @customer = chat.customer      # `Chat` から関連する `Customer` を取得
+  else
+    begin
+      @customer = Customer.find(params[:id])  # `params[:id]` が Customer の ID である場合
+    rescue ActiveRecord::RecordNotFound
+      redirect_to public_customer_path(current_customer), alert: '該当する顧客が見つかりませんでした。'
+      return
+    end
   end
 
-  # チャットルームの処理
   rooms = current_customer.customer_rooms.pluck(:room_id)
   customer_rooms = CustomerRoom.find_by(customer_id: @customer.id, room_id: rooms)
 
-  if customer_rooms
+  unless customer_rooms.nil?
     @room = customer_rooms.room
   else
-    @room = Room.create
+    @room = Room.new
+    @room.save
     CustomerRoom.create(customer_id: current_customer.id, room_id: @room.id)
     CustomerRoom.create(customer_id: @customer.id, room_id: @room.id)
   end
@@ -95,26 +98,19 @@ end
     params.require(:chat).permit(:message, :room_id)
   end
 
- def reject_non_related
-  # チャットの削除アクションの場合、チェックをスキップ
-  return if action_name == 'destroy'
+  def reject_non_related
+     # チャットの削除アクションの場合、チェックをスキップ
+    return if action_name == 'destroy'
 
-  @chat = Chat.find_by(id: params[:id])
+    customer = Customer.find(current_customer.id)
 
-  # if @chat.nil?
-  #   redirect_to root_path, alert: '指定されたチャットが見つかりませんでした。'
-  #   return
-  # end
-
-  # 現在のユーザーがこのチャットに関連していない場合、リダイレクト
-  # unless @chat.customer_id == current_customer.id
-  #   redirect_to public_customer_path(current_customer), alert: 'このチャットにはアクセスできません。'
-  # end
-end
+    if customer.nil?
+      redirect_to root_path, alert: '指定されたユーザーが見つかりませんでした。'
+      return
+    end
+  end
   # チャット通知
   def chat_params
     params.require(:chat).permit(:message, :room_id)
   end
 end
-
-
