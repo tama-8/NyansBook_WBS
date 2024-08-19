@@ -52,6 +52,10 @@ class Public::PostsController < ApplicationController
     flash[:notice] = '投稿が削除されました'
     redirect_to public_customer_path(current_customer)
   end
+  #ユーザーがいいねをした日時の降順（新しい順）
+  def favorites
+    @favorite_posts = current_customer.favorites.order(created_at: :desc).map(&:post)
+  end
 
   private
 
