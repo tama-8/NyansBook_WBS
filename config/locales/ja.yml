@@ -1,0 +1,26 @@
+ja:
+  devise:
+    sessions:
+      admin:
+        signed_in: "管理者としてサインインしました"
+        signed_out: "管理者としてサインアウトしました"
+      customer:
+        signed_in: "サインインしました"
+        signed_out: "サインアウトしました"
+    registrations:
+      customer:
+        signed_up: "サインアップが完了しました"
+  enums:
+    report:
+      reason:
+        malicious_expression: 悪意のある表現
+        inappropriate_content: 不適切な表現
+        misinformation: 誤った情報
+        commercial_purposes: 商業目的
+        spam: スパム
+        other: その他
+  errors:
+    messages:
+      not_saved:
+        one: "1つのエラーのために保存できませんでした"
+        other: "%{count}つのエラーのために保存できませんでした"

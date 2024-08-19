@@ -17,6 +17,11 @@
         </div>
         <!--自己紹介文章-->
         <p class="mt-3"><%= @customer.bio %></p>
+        <!-- フォロー・フォロワー数とフォローボタン&チャット -->
+        <div id="follow_form_<%= @customer.id %>">
+        <%= render 'public/relationships/btn', customer: @customer %>
+        </div>
+        </p>
       </div>
     </div>
   </div>
@@ -26,7 +31,7 @@
   <div class="row w-100">
     <% @posts.each do |post| %>
       <div class="col-md-4 mb-4 d-flex justify-content-center">
-        <div class="card" style="width: 18rem; height: 400px;">
+        <div class="card" style="width: 18rem; height: 430px;">
           <%= link_to public_post_path(post) do %>
             <% if post.image.attached? %>
               <%= image_tag post.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
@@ -51,8 +56,15 @@
              <div class="d-flex">
                 <!-- 投稿日時表記 -->
                 <p class="mb-0"><%= time_ago_in_japanese(post.created_at) %></p>
-                <!-- コメント件数 -->
-                <p class="text-muted  mb-0 ml-2"><%= link_to "#{post.post_comments.count} コメント", public_post_path(post.id) %></p>
+                <!--いいね-->
+                <p id="post_<%= post.id %>favorite-btn"><%= render "public/favorites/favorite-btn", post: post %></p>
+               <!-- コメント件数 -->
+                <p class="text-muted mb-0 ml-2">
+                  <%= link_to public_post_path(post.id) do %>
+                    <i class="fa-regular fa-comment"></i> <%= post.post_comments.count %>
+                  <% end %>
+                </p>
+                
               </div>
             <!-- 説明文章をトリミング -->
             <p class="card-text"><%= truncate(post.content, length: 100) %></p>

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reporter_id: 1
+  reported_id: 1
+  content_id: 1
+  content_type: MyString
+  reason: 1
+  is_checked: false
+
+two:
+  reporter_id: 1
+  reported_id: 1
+  content_id: 1
+  content_type: MyString
+  reason: 1
+  is_checked: false
