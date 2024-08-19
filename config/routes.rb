@@ -46,6 +46,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create,:destroy]
       resource :favorite, only: [:create, :destroy]
+        collection do
+          get :favorites  # 自分がいいねした投稿一覧ページ
+        end
     end
     resources :chats, only: [:create, :show, :destroy] do
       delete :destroy_all, on: :collection
