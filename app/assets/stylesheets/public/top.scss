@@ -9,4 +9,20 @@
   background-repeat: no-repeat;
   min-height: 100vh; /* ビューポートの高さに合わせる */
 }
+.header {
+  height: 100px; /* ヘッダーの高さを固定 */
+  line-height: 100px; /* 中央寄せにするため、line-heightを同じにする */
+  overflow: hidden; /* ロゴが大きすぎて溢れるのを防ぐ */
+  padding: 0; /* 余白を取り除く */
+}
 
+.header img {
+  max-height: 100%; /* ヘッダーの高さに合わせてロゴの高さを調整 */
+  width: auto; /* アスペクト比を保つ */
+  display: inline-block; /* 必要に応じてブロック表示を無効にする */
+  vertical-align: middle; /* ロゴを垂直中央に配置 */
+}
+.header img {
+  max-height: 100px; /* ヘッダーの高さに合わせてロゴの最大高さを設定 */
+  width: auto; /* アスペクト比を維持して幅を自動調整 */
+}
