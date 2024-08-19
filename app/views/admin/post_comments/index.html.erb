@@ -1,0 +1,44 @@
+<!-- app/views/admin/post_comments/index.html.erb -->
+<div class="container">
+  <!-- タイトル -->
+  <div class="d-flex justify-content-start">
+    <h1 class="mt-4 ms-3">コメント一覧</h1>
+  </div>
+
+  <!-- コメント一覧テーブル -->
+  <div class="table-responsive ms-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>投稿内容</th>
+          <th>コメント</th>
+          <th>ユーザー</th>
+          <th>作成日</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @post_comments.each do |post_comment| %>
+          <tr>
+            <td><%= post_comment.id %></td>
+            <td style="width: 200px; word-wrap: break-word;">
+              <%= link_to post_comment.post.content.truncate(30), admin_post_path(post_comment.post) %> <!-- リンクを追加 -->
+            </td>
+            <td style="width: 200px; word-wrap: break-word;"><%= post_comment.comment.truncate(50) %></td>
+            <td><%= link_to post_comment.customer.name, admin_customer_path(post_comment.customer) %></td>
+            <td><%= post_comment.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+            <td>
+              <%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ページネーション -->
+  <div class="ms-3">
+    <%= paginate @post_comments %>
+  </div>
+</div>

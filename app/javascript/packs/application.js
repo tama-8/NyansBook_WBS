@@ -3,16 +3,29 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+// Import Rails UJS, Turbolinks, ActiveStorage, and Turbo
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import "jquery";
+// Import Turbo
+// import { Turbo } from "@hotwired/turbo-rails"
+
+// Import jQuery and Bootstrap
+import jQuery from "jquery"
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
 
+// Start Rails UJS, Turbolinks, and ActiveStorage
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// Start Turbo (automatically started when imported)
+//Turbo.start()
+
+// Make jQuery globally available
+global.$ = jQuery;
+window.$ = jQuery;
