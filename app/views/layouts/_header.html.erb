@@ -1,13 +1,18 @@
 <header >
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <%= link_to root_path do %>
-        <%= image_tag 'logo.png', alt: 'にゃんずbookロゴ', style: 'height: 70px;' %>
+        <%= image_tag 'top_lo.png', alt: 'にゃんずbookロゴ',width: 200, style: ' margin: 0; padding: 0;' %>
      <% end %>
       
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <!--管理者ログイン中ヘッダー-->
         <% if admin_signed_in? %>
+           <li>
+            <%= link_to admin_dashboard_path,class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-chart-line"></i> ダッシュボード
+            <% end %>
+          </li>
            <li>
             <%= link_to admin_root_path,class: 'nav-link text-light' do %>
               <i class="fa-solid fa-users"></i> Customer List
@@ -18,6 +23,24 @@
              <i class="fa-regular fa-image"></i> Post List
             <% end %>
           </li>
+          <li>
+            <%=  link_to admin_post_comments_path,class: 'nav-link text-light' do %>
+             <i class="fa-regular fa-image"></i> Comment List
+            <% end %>
+          </li>
+          <% if admin_signed_in? %>
+            <ul class="nav">
+              <li class="nav-item">
+                <%= link_to admin_reports_path, class: 'nav-link position-relative' do %>
+                  <i class="fa-solid fa-bell"></i>
+                  <% unread_reports_count = Report.where(is_checked: false).count %>
+                  <% if unread_reports_count > 0 %>
+                    <span class="badge badge-danger position-absolute" style="top: -5px; right: -5px;"><%= unread_reports_count %></span>
+                  <% end %>
+                <% end %>
+              </li>
+            </ul>
+          <% end %>
           <li>
             <%= link_to  destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
               <i class="fas fa-sign-out-alt"></i> logout
@@ -43,6 +66,14 @@
           <li>
             <%=  link_to  public_posts_path ,class: 'nav-link text-light' do %>
              <i class="fa-regular fa-image"></i> Post List
+            <% end %>
+          </li>
+          <li>
+            <%= link_to public_notifications_path, class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-bell"></i> 通知
+              <% if @unread_notifications_count > 0 %>
+                <span class="badge badge-danger"><%= @unread_notifications_count %></span>
+              <% end %>
             <% end %>
           </li>
           <li>

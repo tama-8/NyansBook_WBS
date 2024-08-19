@@ -18,6 +18,7 @@
 @import "public/about";
 @import "public/posts";
 @import "public/customars";
+@import "public/chats";
 
 .navbar {
   display: flex;
@@ -27,3 +28,14 @@
 .navbar-brand {
   max-width: 100%; /* ヘッダーの幅に合わせる */
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+

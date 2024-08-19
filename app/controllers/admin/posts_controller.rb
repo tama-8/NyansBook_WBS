@@ -1,33 +1,40 @@
 class Admin::PostsController < ApplicationController
-    before_action :authenticate_admin!
-    before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
+  before_action :set_post, only: [:edit, :update, :destroy]
 
   def index
-      if params[:query].present?
-        @posts = Post.where("content LIKE ?", "%#{params[:query]}%")
-                     .order(created_at: :desc)
-                     .page(params[:page])
-                     .per(10) # ページごとの表示件数を指定
-      else
-        @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
-      end
+    @reports = Report.all
+    
+    @reports.each do |report|
+      Rails.logger.debug "Report ID: #{report.id}, is_checked: #{report.is_checked}"
+    end
+
+    if params[:query].present?
+      @posts = Post.where("content LIKE ?", "%#{params[:query]}%")
+                   .order(created_at: :desc)
+                   .page(params[:page])
+                   .per(10) # ページごとの表示件数を指定
+    else
+      @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
+    end
   end
   
   def show
+    @post = Post.find(params[:id])
   end
 
   def edit
   end
   
   def destroy
-      @post = Post.find(params[:id])
-      @post.destroy
-      redirect_to admin_posts_path, notice: '投稿が削除されました'
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to admin_posts_path, notice: '投稿が削除されました'
   end
 
   def update
     if params[:post][:remove_image] == '1'
-        @post.image.purge
+      @post.image.purge
     end
     
     if @post.update(post_params)
@@ -36,7 +43,7 @@ class Admin::PostsController < ApplicationController
       render :edit
     end
   end
-
+  
   private
 
   def set_post
