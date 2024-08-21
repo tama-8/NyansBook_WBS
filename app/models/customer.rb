@@ -3,11 +3,11 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-   
-  has_one_attached :image      
+
+  has_one_attached :image
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
-  #いいね
+  # いいね
   has_many :favorites
   has_many :favorite_posts, through: :favorites, source: :post
   # 自分がフォローする（与フォロー）側の関係性
@@ -23,11 +23,11 @@ class Customer < ApplicationRecord
   # 被フォロー関係を通じて参照→自分をフォローしている人
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :customer_rooms, dependent: :destroy
-  has_many :chats, dependent: :destroy  
+  has_many :chats, dependent: :destroy
   # チャット通知
-  has_many :received_notifications, class_name: 'Notification', foreign_key: 'recipient_id', dependent: :destroy
-  has_many :sent_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
-  #通報
+  has_many :received_notifications, class_name: "Notification", foreign_key: "recipient_id", dependent: :destroy
+  has_many :sent_notifications, class_name: "Notification", foreign_key: "sender_id", dependent: :destroy
+  # 通報
   has_many :reporter, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
   has_many :reported, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
   # ゲストユーザー
@@ -46,38 +46,38 @@ class Customer < ApplicationRecord
       customer.name = "Guestuser"
     end
   end
-  
+
   def guest_customer?
     email == GUEST_USER_EMAIL
   end
-  
+
   has_one_attached :profile_image
 
   def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.png')
-      profile_image.attach(io: File.open(file_path), filename: "no_image.png", content_type: 'image/png')
+      file_path = Rails.root.join("app/assets/images/no_image.png")
+      profile_image.attach(io: File.open(file_path), filename: "no_image.png", content_type: "image/png")
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
   # 検索機能
   def self.search_for(content, method)
-    if method == 'perfect'
+    if method == "perfect"
       Customer.where(name: content)
-    elsif method == 'forward'
-      Customer.where('name LIKE ?', content + '%')
-    elsif method == 'backward'
-      Customer.where('name LIKE ?', '%' + content)
+    elsif method == "forward"
+      Customer.where("name LIKE ?", content + "%")
+    elsif method == "backward"
+      Customer.where("name LIKE ?", "%" + content)
     else
-      Customer.where('name LIKE ?', '%' + content + '%')
+      Customer.where("name LIKE ?", "%" + content + "%")
     end
   end
 
   # フォロー機能
   # ユーザーのステータスフィードを返す
   def feed
-      following_ids = "SELECT followed_id FROM relationships
+    following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :customer_id"
     Micropost.where("customer_id IN (#{following_ids})
                      OR customer_id = :customer_id", customer_id: id)
@@ -99,8 +99,7 @@ class Customer < ApplicationRecord
   end
 
   private
-  
-  def password_required?
-    new_record? || password.present?
-  end
+    def password_required?
+      new_record? || password.present?
+    end
 end
