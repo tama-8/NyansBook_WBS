@@ -12,8 +12,11 @@ ja:
         signed_up: "サインアップが完了しました"
     failure:
       invalid: "メールアドレスまたはパスワードが無効です"
+      not_found_in_database: "メールアドレスまたはパスワードが無効です"
       admin:
         invalid: "管理者のメールアドレスまたはパスワードが無効です"
+      invalid_email: "メールアドレスを入力してください"
+      invalid_password: "パスワードを入力してください"
   enums:
     report:
       reason:
