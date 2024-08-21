@@ -43,4 +43,4 @@ yarn-debug.log*
 .env
 
 # 特定のファイルを無視
-config/routes.rb:wq
+config/routes.rb:wqvendor/bundle/
