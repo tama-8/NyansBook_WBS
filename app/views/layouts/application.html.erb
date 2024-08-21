@@ -14,10 +14,6 @@
   <body class="d-flex flex-column vh-100 <%= 'top-page-background' if current_page?(controller: 'public/homes', action: 'top') %>">
     <%= render 'layouts/header' %>
     <main class="mb-auto">
-      <!--検索機能-->
-      <!--<div class="d-flex justify-content-center mb-2">-->
-      <!--  <%#= render 'searches/form' %>-->
-      <!--</div>-->
 
       <!-- フラッシュメッセージの表示 -->
       <% if notice %>
@@ -27,6 +23,7 @@
       <% if alert %>
         <div class="alert"><%= alert %></div>
       <% end %>
+      
 
       <%= yield %>
     </main>
