@@ -10,6 +10,10 @@ ja:
     registrations:
       customer:
         signed_up: "サインアップが完了しました"
+    failure:
+      invalid: "メールアドレスまたはパスワードが無効です"
+      admin:
+        invalid: "管理者のメールアドレスまたはパスワードが無効です"
   enums:
     report:
       reason:
