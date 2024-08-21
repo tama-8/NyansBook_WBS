@@ -1,8 +1,9 @@
 <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; margin-top: -50px;">
   <div class="card" style="width: 400px;">
     <div class="card-body">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <h2 class="text-center mb-4">Log in</h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
         
         <div class="form-group mb-3">
           <%= f.label :email %>

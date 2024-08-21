@@ -9,9 +9,9 @@ Rails.application.routes.draw do
 
   # 管理者用
   # URL /admin/sign_in ...
-  devise_for :admins, controllers: {
+  devise_for :admins, path: "admin", controllers: {
     sessions: "admin/sessions"
-  }
+  }, path_names: { sign_in: "" }
   # 未認証の管理者がアクセスした際のリダイレクト先を指定
   unauthenticated :admin do
     root "admin/sessions#new", as: :unauthenticated_admin_root

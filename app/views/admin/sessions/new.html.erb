@@ -1,8 +1,9 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="col-md-6">
     <h1 class="text-center mb-4">管理者ログイン</h1>
+    <%= form_with(scope: resource_name, url: admin_session_path, local: true) do |f| %>
+      <%= render "admin/shared/error_messages", resource: resource %>
 
-    <%= form_with scope: :admin, url: admin_session_path, local: true do |f| %>
       <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, class: 'form-control' %>
@@ -22,3 +23,4 @@
     <% end %>
   </div>
 </div>
+<%= render "admin/shared/links" %>
