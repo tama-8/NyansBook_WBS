@@ -15,7 +15,7 @@ worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-#port ENV.fetch("PORT") { 3000 }
+# port ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -46,11 +46,11 @@ bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
 rails_root = Dir.pwd
 # 本番環境のみデーモン起動
 if Rails.env.production?
-  pidfile File.join(rails_root, 'tmp', 'pids', 'puma.pid')
-  state_path File.join(rails_root, 'tmp', 'pids', 'puma.state')
+  pidfile File.join(rails_root, "tmp", "pids", "puma.pid")
+  state_path File.join(rails_root, "tmp", "pids", "puma.state")
   stdout_redirect(
-    File.join(rails_root, 'log', 'puma.log'),
-    File.join(rails_root, 'log', 'puma-error.log'),
+    File.join(rails_root, "log", "puma.log"),
+    File.join(rails_root, "log", "puma-error.log"),
     true
   )
   # デーモン

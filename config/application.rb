@@ -20,5 +20,6 @@ module NyansBookWbs
     # config.eager_load_paths << Rails.root.join
     config.autoloader = :zeitwerk
     config.i18n.default_locale = :ja
+    config.paths.add "lib", eager_load: true
   end
 end

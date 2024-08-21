@@ -1,5 +1,5 @@
 class CreateNotifications < ActiveRecord::Migration[6.1]
- def change
+  def change
     create_table :notifications do |t|
       t.references :recipient, null: false, foreign_key: { to_table: :customers } # recipient_id カラムを作成し、users テーブルを参照
       t.references :sender, null: false, foreign_key: { to_table: :customers }    # sender_id カラムを作成し、users テーブルを参照
@@ -8,5 +8,5 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
- end
+  end
 end

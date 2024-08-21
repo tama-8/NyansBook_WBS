@@ -50,22 +50,27 @@
         <% elsif customer_signed_in? %>
           <li>
             <%= link_to public_customer_path(current_customer),class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> myHome
+              <i class="fas fa-home"></i> MyHome
             <% end %>
           </li>
           <li>
             <%=  link_to public_mypage_path,class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-cat"></i>mypage
+              <i class="fa-solid fa-cat"></i>MyPage
             <% end %>
           </li>
           <li>
             <%=  link_to new_public_post_path ,class: 'nav-link text-light' do %>
-             <i class="fa-solid fa-camera-retro"></i> Post 
+             <i class="fa-solid fa-camera-retro"></i>NewPost 
             <% end %>
           </li>
           <li>
             <%=  link_to  public_posts_path ,class: 'nav-link text-light' do %>
-             <i class="fa-regular fa-image"></i> Post List
+             <i class="fa-regular fa-image"></i> PostList
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to  favorites_public_posts_path ,class: 'nav-link text-light' do %>
+            <i class="fa-solid fa-heart"></i>いいねList
             <% end %>
           </li>
           <li>

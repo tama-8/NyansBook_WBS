@@ -3,8 +3,8 @@ class Report < ApplicationRecord
   belongs_to :reported, class_name: "Customer", foreign_key: "reported_id"
   # 通報対象のコンテンツを示す多様性（Polymorphic）関連付け
   belongs_to :content, polymorphic: true
-  #通報の対象種類を「コメント」と「投稿」に区別
-# enum content_type: { post: 0, post_comment: 1 }
+  # 通報の対象種類を「コメント」と「投稿」に区別
+  # enum content_type: { post: 0, post_comment: 1 }
   # 通報理由の列挙型（Enum）
   enum reason: {
     malicious_expression: 0,      # 悪意のある表現

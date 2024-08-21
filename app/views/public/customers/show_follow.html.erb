@@ -18,7 +18,11 @@
           <% if @customers.any? %>
             <% @customers.each do |customer| %>
               <%= link_to public_customer_path(customer) do %>
-                <%= image_tag customer.get_profile_image(30, 30), class: "rounded-circle" %>
+                <% if customer.image.attached? %>
+                  <%= image_tag customer.image, size: "30x30", class: "rounded-circle" %>
+                <% else %>
+                  <%= image_tag 'no_image.png', size: "30x30", class: "rounded-circle" %>
+                <% end %>
               <% end %>
             <% end %>
           <% else %>

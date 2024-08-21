@@ -13,12 +13,12 @@ class Public::RelationshipsController < ApplicationController
     render "public/relationships/btn_toggle"
   end
 end
-    
+
 #   before_action :authenticate_customer!
 #   def create
 #     @customer = Customer.find(params[:customer_id])
 #      relationship = Relationship.create(follower_id: current_customer.id, followed_id: @customer.id)
-  
+
 #     #  respond_to do |format|
 #     #   format.js   # 非同期リクエストに対応
 #      end
@@ -33,7 +33,7 @@ end
 # #     current_customer.relationships.find_by(followed_id: customer.id).destroy
 # # 		redirect_to request.referer
 #   end
-  
+
 #   def followings
 #      customer = Customer.find(params[:customer_id])
 # 		@cusutomers = customer.followings
