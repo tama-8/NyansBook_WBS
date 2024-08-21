@@ -1,0 +1,19 @@
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     margin-top: 20px; /* 上に間隔を追加 */
+}
+
+.about-image {
+    width: 60%; /* 画像を小さくする */
+    border-radius: 20px; /* 角を丸くする */
+    margin-bottom: 20px;
+}
+
+.about-text {
+    max-width: 800px;
+    text-align: left;
+    padding: 0 20px;
+}

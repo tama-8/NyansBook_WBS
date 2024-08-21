@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+@import "public/top";
+@import "public/about";
+@import "public/posts";
+@import "public/customars";
+@import "public/chats";
+
+.navbar {
+  display: flex;
+  justify-content: center; /* ヘッダー内でアイテムを中央に配置 */
+}
+
+.navbar-brand {
+  max-width: 100%; /* ヘッダーの幅に合わせる */
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+

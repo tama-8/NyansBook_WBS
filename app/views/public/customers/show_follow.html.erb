@@ -1,0 +1,48 @@
+<% provide(:title, @title) %>
+<div class="d-flex justify-content-center">
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="customer_info text-center" style="margin-top: 80px;">
+        <% if @customer.image.attached? %>
+          <%= image_tag @customer.image, size: "200x200", class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag 'no_image.png', size: "200x200", class: "rounded-circle" %>
+        <% end %>
+        <h1><%= @customer.name %></h1>
+        <span><%= link_to "view my profile", public_customer_path(@customer) %></span>
+        <span><strong>Posts:</strong> <%= @customer.posts.count %></span>
+      </section>
+      <section class="stats">
+        <%= render 'public/relationships/btn', customer: @customer %>
+        <div class="customer_avatars text-center" style="min-height: 100px;">
+          <% if @customers.any? %>
+            <% @customers.each do |customer| %>
+              <%= link_to public_customer_path(customer) do %>
+                <% if customer.image.attached? %>
+                  <%= image_tag customer.image, size: "30x30", class: "rounded-circle" %>
+                <% else %>
+                  <%= image_tag 'no_image.png', size: "30x30", class: "rounded-circle" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <p>No customers to display.</p>
+          <% end %>
+        </div>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3 style="margin-bottom: 20px; margin-top: 20px;"><%= @title %></h3>
+      <div class="customers follow" style="min-height: 300px;">
+        <% if @customers.any? %>
+          <% @customers.each do |customer| %>
+            <%= render "public/customers/index", customer: customer %>
+          <% end %>
+        <% else %>
+          <p>No customers to display.</p>
+        <% end %>
+      </div>
+      <%= paginate @customers if @customers.any? %>
+    </div>
+  </div>
+</div>

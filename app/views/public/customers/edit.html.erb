@@ -1,0 +1,35 @@
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card w-100" style="max-width: 600px;">
+    <div class="card-body">
+      <h1 class="text-center">プロフィールの編集</h1>
+
+      <%= form_with model: @customer, url: public_customer_path(@customer), method: :patch, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :name, '名前' %>
+          <%= f.text_field :name, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, 'Eメール' %>
+          <%= f.email_field :email, class: "form-control", required: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :image, 'プロフィール写真' %>
+          <%= f.file_field :image, class: "form-control-file", accept: "image/*" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :bio, '自己紹介' %>
+          <%= f.text_area :bio, class: "form-control" %>
+        </div>
+
+        <div class="form-group d-flex justify-content-between">
+          <%= f.submit '更新', class: 'btn btn-primary' %>
+          <%= link_to 'キャンセル', public_mypage_path, class: 'btn btn-secondary' %>
+          <% if @customer.email != "guest@example.com" %>
+            <%= link_to '退会', public_withdraw_customer_path, method: :delete, data: { confirm: '本当に退会しますか？' }, class: 'btn btn-danger' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
