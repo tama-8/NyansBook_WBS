@@ -1,0 +1,7 @@
+<!--投稿の検索-->
+<%= form_with(url: admin_posts_path, method: :get, local: true, class: 'form-inline mb-3') do %>
+  <div class="form-group">
+    <%= text_field_tag :query, params[:query], placeholder: "投稿内容で検索", class: 'form-control' %>
+  </div>
+  <%= submit_tag "検索", class: 'btn btn-primary ml-2' %>
+<% end %>

@@ -1,0 +1,51 @@
+<h1 style="text-align: center;margin-top: 20px;">通報一覧</h1>
+
+<div style="display: flex; justify-content: center;">
+  <% if @reports.any? %>
+  <table class="table" style="width: auto;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>通報者</th>
+        <th>通報された人</th>
+        <th>対象種類</th>
+        <th>対象コンテンツ</th>
+        <th>通報理由</th>
+        <th>日時</th>
+        <th>対応</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reports.each do |report| %>
+        <tr>
+          <td><%= report.id %></td>
+          <td><%= report.reporter.name %></td>
+          <td><%= report.reported.name %></td>
+          <td><%= report.content_type == "PostComment" ? "コメント" : "投稿" %></td>
+          <td>
+            <% post = if report.content_type = 'Post'
+                        Post.find(report.content_id)
+                      elsif report.content_type = 'PostComment'
+                        PostComment.find(report.content_id).post
+                      end %>
+            <%= link_to 'コンテンツを表示', admin_post_path(post) %>
+          </td>
+          <td><%= report.reason_i18n %></td>
+          <td><%= report.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+          <td> <!-- 対応カラム -->
+            <% if report.is_checked %>
+              <span class="text-muted">確認済み</span>
+            <% else %>
+              <%= link_to 'コンテンツ削除', delete_content_admin_report_path(report), method: :delete, data: { confirm: '本当にこのコンテンツを削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+              <%= link_to '無視', ignore_admin_report_path(report), method: :patch, data: { confirm: 'この通報を無視しますか？' }, class: 'btn btn-secondary btn-sm' %>
+              <%= link_to '確認済みにする', toggle_admin_report_path(report), method: :patch, class: 'btn btn-success btn-sm' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <p>通報がありません。</p>
+  <% end %>
+</div>

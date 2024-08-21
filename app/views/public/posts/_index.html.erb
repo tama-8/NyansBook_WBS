@@ -1,0 +1,38 @@
+<!-- customerの検索投稿一覧 -->
+<div class="container d-flex justify-content-center">
+  <div class="row w-100">
+    <% posts.each do |post| %>
+      <div class="col-md-4 mb-4 d-flex justify-content-center">
+        <div class="card" style="width: 18rem; height: 400px;">
+          <%= link_to public_post_path(post) do %>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag 'no_image.png', class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+          <% end %>
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <% if post.customer.image.attached? %>
+                <%= link_to public_customer_path(post.customer) do %>
+                  <%= image_tag post.customer.image, size: "50x50", class: "rounded-circle mr-2" %>
+                <% end %>
+              <% else %>
+                <%= link_to public_customer_path(post.customer) do %>
+                  <%= image_tag 'no_image.png', size: "50x50", class: "rounded-circle mr-2" %>
+                <% end %>
+              <% end %>
+              <!-- ユーザーネーム -->
+              <p class="mb-0"><%= post.customer.name %></p>
+            </div>
+            <!-- 投稿日時表記 -->
+            <p class="text-muted mb-1"><%= time_ago_in_japanese(post.created_at) %></p>
+            <!-- 説明文章をトリミング -->
+            <p class="card-text"><%= truncate(post.content, length: 100) %></p>
+            <%= link_to '詳細を見る', public_post_path(post), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
