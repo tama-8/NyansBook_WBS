@@ -4,7 +4,7 @@ class Admin::PostsController < ApplicationController
 
   def index
     @reports = Report.all
-    
+
     @reports.each do |report|
       Rails.logger.debug "Report ID: #{report.id}, is_checked: #{report.is_checked}"
     end
@@ -18,39 +18,38 @@ class Admin::PostsController < ApplicationController
       @posts = Post.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
-  
+
   def show
     @post = Post.find(params[:id])
   end
 
   def edit
   end
-  
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_posts_path, notice: '投稿が削除されました'
+    redirect_to admin_posts_path, notice: "投稿が削除されました"
   end
 
   def update
-    if params[:post][:remove_image] == '1'
+    if params[:post][:remove_image] == "1"
       @post.image.purge
     end
-    
+
     if @post.update(post_params)
-      redirect_to admin_post_path(@post), notice: '投稿が更新されました。'
+      redirect_to admin_post_path(@post), notice: "投稿が更新されました。"
     else
       render :edit
     end
   end
-  
+
   private
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
-
-  def post_params
-    params.require(:post).permit(:content, :image)
-  end
+    def post_params
+      params.require(:post).permit(:content, :image)
+    end
 end

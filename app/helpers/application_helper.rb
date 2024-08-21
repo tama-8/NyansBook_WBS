@@ -1,5 +1,5 @@
 module ApplicationHelper
-    #投稿日時の表示
+  # 投稿日時の表示
   def time_ago_in_japanese(time)
     seconds_ago = Time.now - time
     case seconds_ago
