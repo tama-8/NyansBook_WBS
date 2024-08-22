@@ -20,25 +20,105 @@
 @import "public/customars";
 @import "public/chats";
 
+header,
+footer {
+min-width: 960px;
+}
+
+
 .navbar {
+  margin: 0 auto;
   display: flex;
   justify-content: center; /* ヘッダー内でアイテムを中央に配置 */
+  align-items: center; /* 縦方向で中央に配置 */
+  height: 100px; /* デフォルトの高さ */
+  background-color: #000; /* 背景色を黒にする */
+  margin: 0;
+  padding: 0;
+  position: fixed; /* 画面上部に固定 */
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-brand {
-  max-width: 100%; /* ヘッダーの幅に合わせる */
+  max-width: 960px; /* ヘッダーの幅に合わせる */
+  max-height: 100%; /* ヘッダーの高さに合わせる */
+  margin: 0 auto;
 }
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #000; /* 背景色を黒にする */
 }
 
+@media (max-width: 799px) {
+  .container {
+  max-width: 800px;
+  width: 100%; /* 画面幅に合わせる */
+  margin: 0 auto; /* 左右中央寄せ */
+}
+  .navbar {
+    justify-content: space-between; /* ロゴとハンバーガーアイコンを左右に配置 */
+    padding: 10px 20px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar-toggler {
+    display: block; /* ハンバーガーボタンを表示 */
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    display: block;
+    margin: 5px 0;
+  }
+
+  .collapse.navbar-collapse {
+    display: none; /* メニューは初期状態で非表示 */
+    flex-direction: column;
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    top: 60px;
+    left: 0;
+  }
+
+  .collapse.navbar-collapse.show {
+    display: flex; /* メニューを表示 */
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-item {
+    margin: 10px 0;
+  }
+
+  .navbar-brand {
+    max-height: 50px; /* ロゴの最大高さを設定 */
+    width: auto;
+    display: block; /* ロゴをブロックレベルで表示 */
+  }
+}
+
+
 #error_explanation > h2 {
-    font-size: 18px;
+  font-size: 18px;
 }
