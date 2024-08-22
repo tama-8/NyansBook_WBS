@@ -2,18 +2,70 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+// .top-page-background {
+//   background-image: image-url('top.jpg'); /* assets/images/top.png */
+//   background-size: cover;
+//   background-position: center center; /* デフォルトは中央に配置 */
+//   background-repeat: no-repeat;
+//   min-height: 100vh;
+
+//   /* 画面幅が1200px以上のとき */
+//   @media (min-width: 1200px) {
+//     background-position: right center; /* 右側に寄せる */
+//   }
+
+//   /* 画面幅が800px以上1200px未満のとき */
+//   @media (min-width: 800px) and (max-width: 1199px) {
+//     background-position: calc(100% - 5px) center; /* 少し右に寄せる */
+//   }
+
+//   /* 画面幅が800px未満のとき */
+//   @media (max-width: 799px) {
+//     background-position: calc(100% - 1px) center; /* 中央に配置 */
+//   }
+// }
+// .header {
+//   width: auto; /* 初期値のため、指定してもしなくても結果は同じ */
+//   max-width: 960px;
+//   margin: auto; /* 左右のスペースを均等にするための指定 */
+//   height: 100px; /* ヘッダーの高さを固定 */
+//   line-height: 100px; /* 中央寄せにするため、line-heightを同じにする */
+//   overflow: hidden; /* ロゴが大きすぎて溢れるのを防ぐ */
+//   padding: 0; /* 余白を取り除く */
+// }
+
+// .header img {
+//   max-height: 100%; /* ヘッダーの高さに合わせてロゴの高さを調整 */
+//   width: auto; /* アスペクト比を保つ */
+//   display: inline-block; /* 必要に応じてブロック表示を無効にする */
+//   vertical-align: middle; /* ロゴを垂直中央に配置 */
+// }
 .top-page-background {
-  background-image: image-url('top.jpg'); /* assets/images/top.png */
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh; /* ビューポートの高さに合わせる */
+  background-color: #000; /* 背景を黒に設定 */
+  min-height: 100vh;
+  position: relative;
 }
-.header {
-  height: 100px; /* ヘッダーの高さを固定 */
-  line-height: 100px; /* 中央寄せにするため、line-heightを同じにする */
-  overflow: hidden; /* ロゴが大きすぎて溢れるのを防ぐ */
-  padding: 0; /* 余白を取り除く */
+
+.object-container {
+  position: absolute;
+  top: 50%; /* 垂直方向で中央に配置 */
+  right: auto; /* rightを無効化 */
+  left: 60%; /* ロゴに寄せるため、左からの距離を設定 */
+  transform: translateY(-50%);
+  margin: 10px 0; /* ロゴと対象物の間に適切な余白を追加 */
+}
+
+.object-image {
+   width: 300%; /* 画像をコンテナの幅に合わせる */
+  max-width: 600px; /* 画像の最大幅を設定 */
+  height: auto; /* アスペクト比を保ちながら高さを自動調整 */
+  margin-left: -200px; /* 左に200pxだけ余分に寄せる */
+}
+
+.logo-container {
+  text-align: center;
+  margin-top: 20px;
+  margin-left: -250px; /* 左に250pxだけ余分に寄せる */
 }
 
 .header img {
@@ -22,7 +74,47 @@
   display: inline-block; /* 必要に応じてブロック表示を無効にする */
   vertical-align: middle; /* ロゴを垂直中央に配置 */
 }
-.header img {
-  max-height: 100px; /* ヘッダーの高さに合わせてロゴの最大高さを設定 */
-  width: auto; /* アスペクト比を維持して幅を自動調整 */
+
+@media (min-width: 800px) {
+  .logo-container {
+    margin-right: 20px; /* ロゴと対象物の間のスペースを調整 */
+  }
+}
+
+@media (max-width: 799px) {
+  .top-page-background {
+    flex-direction: column; /* 縦並び */
+  }
+
+  .navbar-brand {
+    max-width: 100px; /* ロゴの最大幅を小さく設定 */
+    max-height: 30px; /* ロゴの最大高さを小さく設定 */
+  }
+
+  .logo-container {
+    margin-bottom: 5px; /* ロゴと対象物の間のスペースを調整 */
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .object-image {
+    width: 300%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+.logo-container{
+  width: 50%;
+  margin-left: -80px;
+}
+  .text-content {
+    margin: 0 auto;
+    padding: 10px;
+  }
 }
