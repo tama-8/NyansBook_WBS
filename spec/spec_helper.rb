@@ -27,9 +27,15 @@ RSpec.configure do |config|
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
-    config.before(:each, type: :system) do
+
+  config.before(:each, type: :system) do
     driven_by :rack_test
   end
+
+  # Rails controller testing module configurations
+  # config.include Rails::Controller::Testing::TemplateAssertions
+  # config.include Rails::Controller::Testing::Integration
+  # config.include Rails::Controller::Testing::TestProcess
 
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.
@@ -46,7 +52,7 @@ RSpec.configure do |config|
   # inherited by the metadata hash of host groups and examples, rather than
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
- end
+end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -95,3 +101,19 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 # end
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'capybara/rails'
+require 'capybara/rspec'
+
+Capybara.configure do |config|
+  config.default_driver = :selenium_chrome
+end
+
+RSpec.configure do |config|
+  config.include Capybara::DSL
+
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome
+  end
+end
