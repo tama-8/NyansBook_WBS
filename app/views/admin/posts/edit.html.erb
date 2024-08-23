@@ -10,7 +10,7 @@
 
       <div class="form-group">
         <%= form.label :image, "画像" %>
-        <%= form.file_field :image, class: 'form-control' %>
+        <%= form.file_field :image %>
       </div>
 
       <% if @post.image.attached? %>
