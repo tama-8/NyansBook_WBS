@@ -22,13 +22,17 @@
           <td><%= report.reporter.name %></td>
           <td><%= report.reported.name %></td>
           <td><%= report.content_type == "PostComment" ? "コメント" : "投稿" %></td>
-          <td>
-            <% post = if report.content_type = 'Post'
-                        Post.find(report.content_id)
-                      elsif report.content_type = 'PostComment'
-                        PostComment.find(report.content_id).post
+         <td>
+            <% post = if report.content_type == 'Post'
+                        Post.find_by(id: report.content_id)
+                      elsif report.content_type == 'PostComment'
+                        PostComment.find_by(id: report.content_id)&.post
                       end %>
-            <%= link_to 'コンテンツを表示', admin_post_path(post) %>
+            <% if post.present? %>
+              <%= link_to 'コンテンツを表示', admin_post_path(post) %>
+            <% else %>
+              <em>該当のコンテンツが見つかりません</em>
+            <% end %>
           </td>
           <td><%= report.reason_i18n %></td>
           <td><%= report.created_at.strftime('%Y/%m/%d %H:%M') %></td>

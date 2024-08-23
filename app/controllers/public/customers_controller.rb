@@ -43,8 +43,13 @@ module Public
       @title = "Following"
       @customer  = Customer.find(params[:id])
       @customers = @customer.following.page(params[:page]).per(10)
+
+      # 自分自身のページか、フォローしている相手のページかを確認
+      @show_chat_link = @customer == current_customer || current_customer.following.include?(@customer)
+
       render "show_follow"
     end
+
 
     def followers
       @title = "Followers"
