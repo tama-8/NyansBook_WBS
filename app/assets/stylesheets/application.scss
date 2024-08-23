@@ -23,57 +23,62 @@
 header,
 footer {
 min-width: 960px;
+// width: 100%; /* 画面幅に合わせて調整 */
+// margin: 0 auto
 }
-
-
 .navbar {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center; /* ヘッダー内でアイテムを中央に配置 */
-  align-items: center; /* 縦方向で中央に配置 */
-  height: 100px; /* デフォルトの高さ */
-  background-color: #000; /* 背景色を黒にする */
-  margin: 0;
-  padding: 0;
-  position: fixed; /* 画面上部に固定 */
-  top: 0;
-  z-index: 1000;
+  // margin: 0 auto;
+  // display: flex;
+  // justify-content: center; /* ヘッダー内でアイテムを中央に配置 */
+  // align-items: center; /* 縦方向で中央に配置 */
+  // height: 100px; /* デフォルトの高さ */
+  // background-color: #000; /* 背景色を黒にする */
+  // margin: 0;
+  // padding: 0;
+  // position: fixed; /* 画面上部に固定 */
+  // top: 0;
+  // z-index: 1000;
+  // left: 0;
+  // width: 100%;
 }
 
-.navbar-brand {
-  max-width: 960px; /* ヘッダーの幅に合わせる */
-  max-height: 100%; /* ヘッダーの高さに合わせる */
-  margin: 0 auto;
-}
+// .navbar-brand {
+//   max-width: 960px; /* ヘッダーの幅に合わせる */
+//   max-height: 50%; /* ヘッダーの高さに合わせる */
+//   margin: 0 auto;
+// }
 
 html, body {
-  height: 100%;
+  height: 10%;
   margin: 0;
   padding: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  // margin: 0;
+  // padding: 0;
   background-color: #000; /* 背景色を黒にする */
 }
+// .container {
+//   margin-top: 100px; /* ヘッダーの高さに合わせて調整 */
+//   min-height: auto; /* 高さを自動調整 */
+// }
 
 @media (max-width: 799px) {
   .container {
-  max-width: 800px;
-  width: 100%; /* 画面幅に合わせる */
-  margin: 0 auto; /* 左右中央寄せ */
-}
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
   .navbar {
-    justify-content: space-between; /* ロゴとハンバーガーアイコンを左右に配置 */
+    justify-content: space-between;
     padding: 10px 20px;
-    padding: 0;
     margin: 0;
   }
 
   .navbar-toggler {
-    display: block; /* ハンバーガーボタンを表示 */
+    display: block;
     background: none;
     border: none;
     cursor: pointer;
@@ -88,18 +93,19 @@ body {
   }
 
   .collapse.navbar-collapse {
-    display: none; /* メニューは初期状態で非表示 */
+    // visibility: hidden; /* メニューを初期状態で非表示 */
     flex-direction: column;
     width: 100%;
     background-color: #000;
     position: absolute;
     top: 60px;
     left: 0;
+    z-index: 10; /* メニューが他の要素の上に表示されるように設定 */
   }
 
-  .collapse.navbar-collapse.show {
-    display: flex; /* メニューを表示 */
-  }
+  // .collapse.navbar-collapse.show {
+  //   visibility: visible; /* ハンバーガーメニューを表示 */
+  // }
 
   .navbar-nav {
     flex-direction: column;
@@ -110,13 +116,14 @@ body {
   .nav-item {
     margin: 10px 0;
   }
+}
 
   .navbar-brand {
     max-height: 50px; /* ロゴの最大高さを設定 */
     width: auto;
     display: block; /* ロゴをブロックレベルで表示 */
   }
-}
+
 
 
 #error_explanation > h2 {
