@@ -57,10 +57,10 @@ group :test do
   gem "capybara", ">= 3.26"
   gem "selenium-webdriver", ">= 4.0.0.rc1"
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'faker'
+  gem "webdrivers"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -82,5 +82,4 @@ gem "mini_magick"
 gem "enum_help"
 gem "rails-i18n"
 # バッチ処理
-gem 'whenever', require: false
-
+gem "whenever", require: false

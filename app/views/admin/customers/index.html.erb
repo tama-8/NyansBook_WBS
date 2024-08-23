@@ -46,6 +46,6 @@
 
   <!-- ページネーション -->
   <div class="ms-3">
-    <%= paginate @customers %>
+    <%= paginate @customers, params: { query: params[:query] }, url: url_for(controller: 'customers', action: 'index') %>
   </div>
 </div>
