@@ -1,115 +1,51 @@
-<header >
+<header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-     <%= link_to root_path do %>
-        <%= image_tag 'top_lo.png', alt: 'にゃんずbookロゴ',width: 200, style: ' margin: 0; padding: 0;' %>
-     <% end %>
-      
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <!--管理者ログイン中ヘッダー-->
+    <%= link_to root_path do %>
+      <%= image_tag 'top_lo.png', alt: 'にゃんずbookロゴ', width: 200, style: ' margin: 0; padding: 0;' %>
+    <% end %>
+    
+    <!-- ハンバーガーボタンの追加 -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
         <% if admin_signed_in? %>
-           <li>
-            <%= link_to admin_dashboard_path,class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-chart-line"></i> ダッシュボード
+          <!-- 管理者ログイン中のナビゲーション -->
+          <li><%= link_to admin_dashboard_path, class: 'nav-link text-light' do %><i class="fa-solid fa-chart-line"></i> ダッシュボード<% end %></li>
+          <li><%= link_to admin_root_path, class: 'nav-link text-light' do %><i class="fa-solid fa-users"></i> Customer List<% end %></li>
+          <li><%= link_to admin_posts_path, class: 'nav-link text-light' do %><i class="fa-regular fa-image"></i> Post List<% end %></li>
+          <li><%= link_to admin_post_comments_path, class: 'nav-link text-light' do %><i class="fa-regular fa-image"></i> Comment List<% end %></li>
+          <li class="nav-item"><%= link_to admin_reports_path, class: 'nav-link position-relative' do %>
+            <i class="fa-solid fa-bell"></i>
+            <% unread_reports_count = Report.where(is_checked: false).count %>
+            <% if unread_reports_count > 0 %>
+              <span class="badge badge-danger position-absolute" style="top: -5px; right: -5px;"><%= unread_reports_count %></span>
             <% end %>
-          </li>
-           <li>
-            <%= link_to admin_customers_path,class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-users"></i> Customer List
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to admin_posts_path ,class: 'nav-link text-light' do %>
-             <i class="fa-regular fa-image"></i> Post List
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to admin_post_comments_path,class: 'nav-link text-light' do %>
-             <i class="fa-regular fa-image"></i> Comment List
-            <% end %>
-          </li>
-          <% if admin_signed_in? %>
-            <ul class="nav">
-              <li class="nav-item">
-                <%= link_to admin_reports_path, class: 'nav-link position-relative' do %>
-                  <i class="fa-solid fa-bell"></i>
-                  <% unread_reports_count = Report.where(is_checked: false).count %>
-                  <% if unread_reports_count > 0 %>
-                    <span class="badge badge-danger position-absolute" style="top: -5px; right: -5px;"><%= unread_reports_count %></span>
-                  <% end %>
-                <% end %>
-              </li>
-            </ul>
-          <% end %>
-          <li>
-            <%= link_to  destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> logout
-            <% end %>
-          </li>
-          <!--顧客ログイン中ヘッダー-->
+          <% end %></li>
+          <li><%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %><i class="fas fa-sign-out-alt"></i> logout<% end %></li>
         <% elsif customer_signed_in? %>
-          <li>
-            <%= link_to public_customer_path(current_customer),class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> MyHome
+          <!-- 顧客ログイン中のナビゲーション -->
+          <li><%= link_to public_customer_path(current_customer), class: 'nav-link text-light' do %><i class="fas fa-home"></i> MyHome<% end %></li>
+          <li><%= link_to public_mypage_path, class: 'nav-link text-light' do %><i class="fa-solid fa-cat"></i>MyPage<% end %></li>
+          <li><%= link_to new_public_post_path, class: 'nav-link text-light' do %><i class="fa-solid fa-camera-retro"></i>NewPost<% end %></li>
+          <li><%= link_to public_posts_path, class: 'nav-link text-light' do %><i class="fa-regular fa-image"></i> PostList<% end %></li>
+          <li><%= link_to favorites_public_posts_path, class: 'nav-link text-light' do %><i class="fa-solid fa-heart"></i>いいねList<% end %></li>
+          <li><%= link_to public_notifications_path, class: 'nav-link text-light' do %><i class="fa-solid fa-bell"></i> 通知
+            <% if @unread_notifications_count > 0 %>
+              <span class="badge badge-danger"><%= @unread_notifications_count %></span>
             <% end %>
-          </li>
-          <li>
-            <%=  link_to public_mypage_path,class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-cat"></i>MyPage
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to new_public_post_path ,class: 'nav-link text-light' do %>
-             <i class="fa-solid fa-camera-retro"></i>NewPost 
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to  public_posts_path ,class: 'nav-link text-light' do %>
-             <i class="fa-regular fa-image"></i> PostList
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to  favorites_public_posts_path ,class: 'nav-link text-light' do %>
-            <i class="fa-solid fa-heart"></i>いいねList
-            <% end %>
-          </li>
-          <li>
-            <%= link_to public_notifications_path, class: 'nav-link text-light' do %>
-              <i class="fa-solid fa-bell"></i> 通知
-              <% if @unread_notifications_count > 0 %>
-                <span class="badge badge-danger"><%= @unread_notifications_count %></span>
-              <% end %>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to destroy_customer_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> logout
-            <% end %>
-          </li>
-          <!--ログインしていない時のヘッダー画面-->
+          <% end %></li>
+          <li><%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %><i class="fas fa-sign-out-alt"></i> logout<% end %></li>
         <% else %>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Home
-            <% end %>
-          </li>
-          <li>
-            <%= link_to public_about_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-link"></i> About
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_customer_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-user-plus"></i> sign up
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_customer_session_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-in-alt"></i> login
-            <% end %>
-          </li>
+          <!-- ログインしていない時のナビゲーション -->
+          <li><%= link_to root_path, class: 'nav-link text-light' do %><i class="fas fa-home"></i> Home<% end %></li>
+          <li><%= link_to public_about_path, class: 'nav-link text-light' do %><i class="fas fa-link"></i> About<% end %></li>
+          <li><%= link_to new_customer_registration_path, class: 'nav-link text-light' do %><i class="fas fa-user-plus"></i> sign up<% end %></li>
+          <li><%= link_to new_customer_session_path, class: 'nav-link text-light' do %><i class="fas fa-sign-in-alt"></i> login<% end %></li>
         <% end %>
-        </ul>
-      </div>
+      </ul>
+    </div>
   </nav>
 </header>
