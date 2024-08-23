@@ -29,3 +29,14 @@ ActiveStorage.start()
 // Make jQuery globally available
 global.$ = jQuery;
 window.$ = jQuery;
+//ハンバーガーメニューのトグルを実装
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.navbar-toggler').addEventListener('click', function() {
+        var menu = document.querySelector('.collapse.navbar-collapse');
+        if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
+        } else {
+            menu.classList.add('show');
+        }
+    });
+});

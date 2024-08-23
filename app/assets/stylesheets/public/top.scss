@@ -47,11 +47,12 @@
 }
 
 .object-container {
-  position: absolute;
-  top: 50%; /* 垂直方向で中央に配置 */
+  position: relative;
+  z-index: 2; /* 画像がリンクや背景の下に行かないように調整 */
+  top: 20%; /* 垂直方向で中央に配置 */
   right: auto; /* rightを無効化 */
   left: 60%; /* ロゴに寄せるため、左からの距離を設定 */
-  transform: translateY(-50%);
+  transform: translateY(-150%);
   margin: 10px 0; /* ロゴと対象物の間に適切な余白を追加 */
 }
 
@@ -66,6 +67,8 @@
   text-align: center;
   margin-top: 20px;
   margin-left: -250px; /* 左に250pxだけ余分に寄せる */
+  position: relative;
+  z-index: 3; /* ロゴが画像の上に表示されるように調整 */
 }
 
 .header img {
@@ -73,6 +76,16 @@
   width: auto; /* アスペクト比を保つ */
   display: inline-block; /* 必要に応じてブロック表示を無効にする */
   vertical-align: middle; /* ロゴを垂直中央に配置 */
+}
+
+.btn-wrapper {
+    position: relative;
+    z-index: 3; /* ボタンが画像の上に表示されるように調整 */
+}
+
+.top-page-content {
+    position: relative;
+    z-index: 3; /* すべてのテキストとボタンが画像の上に表示されるように調整 */
 }
 
 @media (min-width: 800px) {

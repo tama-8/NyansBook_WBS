@@ -11,7 +11,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100 <%= 'top-page-background' if current_page?(controller: 'public/homes', action: 'top') %>">
+  <body class="d-flex flex-column  <%= 'top-page-background' if current_page?(controller: 'public/homes', action: 'top') %>">
     <%= render 'layouts/header' %>
     <main class="mb-auto">
 
