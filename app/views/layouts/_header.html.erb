@@ -14,7 +14,7 @@
         <% if admin_signed_in? %>
           <!-- 管理者ログイン中のナビゲーション -->
           <li><%= link_to admin_dashboard_path, class: 'nav-link text-light' do %><i class="fa-solid fa-chart-line"></i> ダッシュボード<% end %></li>
-          <li><%= link_to admin_root_path, class: 'nav-link text-light' do %><i class="fa-solid fa-users"></i> Customer List<% end %></li>
+          <li><%= link_to  admin_customers_path, class: 'nav-link text-light' do %><i class="fa-solid fa-users"></i> Customer List<% end %></li>
           <li><%= link_to admin_posts_path, class: 'nav-link text-light' do %><i class="fa-regular fa-image"></i> Post List<% end %></li>
           <li><%= link_to admin_post_comments_path, class: 'nav-link text-light' do %><i class="fa-regular fa-image"></i> Comment List<% end %></li>
           <li class="nav-item"><%= link_to admin_reports_path, class: 'nav-link position-relative' do %>
