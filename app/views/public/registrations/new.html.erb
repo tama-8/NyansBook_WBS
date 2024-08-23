@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="card" style="width: 400px;">
     <div class="card-body">
       <h2 class="text-center mb-4">Sign up</h2>
@@ -30,11 +30,13 @@
         </div>
 
         <div class="text-center">
-          <%= f.submit "Sign up", class: "btn btn-primary" %>
+          <%= f.submit "Sign up", class: "btn btn-success" %>
         </div>
       <% end %>
     </div>
   </div>
+   <div class="mt-3">
+    <p>登録された方はこちらから<%= render "public/shared/links" %></p>
+  </div>
 </div>
 
-<%= render "public/shared/links" %>

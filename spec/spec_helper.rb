@@ -101,10 +101,17 @@ end
   Kernel.srand config.seed
 =end
 # end
+<<<<<<< HEAD
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'capybara/rails'
 require 'capybara/rspec'
+=======
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "capybara/rails"
+require "capybara/rspec"
+>>>>>>> main
 
 Capybara.configure do |config|
   config.default_driver = :selenium_chrome
@@ -116,4 +123,8 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :selenium_chrome
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> main
