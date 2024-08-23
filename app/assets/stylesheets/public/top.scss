@@ -41,6 +41,7 @@
 //   vertical-align: middle; /* ロゴを垂直中央に配置 */
 // }
 .top-page-background {
+  position: relative;
   background-color: #000; /* 背景を黒に設定 */
   min-height: 100vh;
   position: relative;
