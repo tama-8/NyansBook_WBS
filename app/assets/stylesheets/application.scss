@@ -20,22 +20,31 @@
 @import "public/customars";
 @import "public/chats";
 
-header,
-footer {
-min-width: 960px;
-width: 100%; /* 画面幅に合わせて調整 */
-margin: 0 auto
-}
-.navbar {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center; /* ヘッダー内でアイテムを中央に配置 */
-  align-items: center; /* 縦方向で中央に配置 */
-  height: 100px; /* デフォルトの高さ */
-  background-color: #000; /* 背景色を黒にする */
+body, html {
+  height: 100%;
   margin: 0;
   padding: 0;
-  position: fixed; /* 画面上部に固定 */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+}
+
+header, footer {
+  min-width: 960px;
+  width: 100%; /* 画面幅に合わせて調整 */
+  margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  background-color: #000;
+  position: fixed;
   top: 0;
   z-index: 1000;
   left: 0;
@@ -43,29 +52,30 @@ margin: 0 auto
 }
 
 .navbar-brand {
-  max-width: 960px; /* ヘッダーの幅に合わせる */
-  max-height: 50%; /* ヘッダーの高さに合わせる */
+  max-width: 960px;
+  max-height: 50%;
   margin: 0 auto;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #000; /* 背景色を黒にする */
-}
 .container {
   margin-top: 100px; /* ヘッダーの高さに合わせて調整 */
-  min-height: auto; /* 高さを自動調整 */
+  flex: 1; /* フッターの上まで高さを調整 */
+  overflow-y: auto; /* 内容が多いときにスクロール可能に */
+  background-color: #fff; /* 背景色を白にするなど適宜調整 */
+}
+
+footer {
+  height: 100px; /* フッターの高さ */
+  background-color: #333; /* フッターの背景色 */
+  position: fixed; /* 画面下部に固定 */
+  bottom: 0;
+  width: 100%;
 }
 
 main {
-  height: 80vh;
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 100px; /* フッターの高さ分の余白を追加 */
 }
 
 @media (max-width: 799px) {
