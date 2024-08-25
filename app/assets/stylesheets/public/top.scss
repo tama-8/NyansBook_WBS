@@ -1,45 +1,4 @@
-// Place all the styles related to the public/homes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
 
-// .top-page-background {
-//   background-image: image-url('top.jpg'); /* assets/images/top.png */
-//   background-size: cover;
-//   background-position: center center; /* デフォルトは中央に配置 */
-//   background-repeat: no-repeat;
-//   min-height: 100vh;
-
-//   /* 画面幅が1200px以上のとき */
-//   @media (min-width: 1200px) {
-//     background-position: right center; /* 右側に寄せる */
-//   }
-
-//   /* 画面幅が800px以上1200px未満のとき */
-//   @media (min-width: 800px) and (max-width: 1199px) {
-//     background-position: calc(100% - 5px) center; /* 少し右に寄せる */
-//   }
-
-//   /* 画面幅が800px未満のとき */
-//   @media (max-width: 799px) {
-//     background-position: calc(100% - 1px) center; /* 中央に配置 */
-//   }
-// }
-// .header {
-//   width: auto; /* 初期値のため、指定してもしなくても結果は同じ */
-//   max-width: 960px;
-//   margin: auto; /* 左右のスペースを均等にするための指定 */
-//   height: 100px; /* ヘッダーの高さを固定 */
-//   line-height: 100px; /* 中央寄せにするため、line-heightを同じにする */
-//   overflow: hidden; /* ロゴが大きすぎて溢れるのを防ぐ */
-//   padding: 0; /* 余白を取り除く */
-// }
-
-// .header img {
-//   max-height: 100%; /* ヘッダーの高さに合わせてロゴの高さを調整 */
-//   width: auto; /* アスペクト比を保つ */
-//   display: inline-block; /* 必要に応じてブロック表示を無効にする */
-//   vertical-align: middle; /* ロゴを垂直中央に配置 */
-// }
 .top-page-background {
   position: relative;
   background-color: #000; /* 背景を黒に設定 */
