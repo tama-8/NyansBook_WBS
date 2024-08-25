@@ -57,20 +57,20 @@ header, footer {
   margin: 0 auto;
 }
 
-.container {
-  margin-top: 100px; /* ヘッダーの高さに合わせて調整 */
-  flex: 1; /* フッターの上まで高さを調整 */
-  overflow-y: auto; /* 内容が多いときにスクロール可能に */
-  // background-color: #fff; /* 背景色を白にするなど適宜調整 */
-}
+// .container {
+//   margin-top: 100px; /* ヘッダーの高さに合わせて調整 */
+//   flex: 1; /* フッターの上まで高さを調整 */
+//   overflow-y: auto; /* 内容が多いときにスクロール可能に */
+//   // background-color: #fff; /* 背景色を白にするなど適宜調整 */
+// }
 
 footer {
-  height: 200px; /* フッターの高さ */
+  height: 100px; /* フッターの高さ */
   background-color: #333; /* フッターの背景色 */
   position: fixed; /* 画面下部に固定 */
   bottom: 0;
   width: 100%;
-   min-height: 100px; /* フッターの最低高さを設定 */
+  min-height: 100px; /* フッターの最低高さを設定 */
 }
 
 main {
