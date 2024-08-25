@@ -17,10 +17,10 @@
 }
 
 .object-image {
-   width: 300%; /* 画像をコンテナの幅に合わせる */
+  // width: 300%; /* 画像をコンテナの幅に合わせる */
   max-width: 600px; /* 画像の最大幅を設定 */
   height: auto; /* アスペクト比を保ちながら高さを自動調整 */
-  margin-left: -200px; /* 左に200pxだけ余分に寄せる */
+  margin-left: -100px; /* 左に200pxだけ余分に寄せる */
 }
 
 .logo-container {
