@@ -1,4 +1,4 @@
-#テスト用のユーザーオブジェクトを作成
+# テスト用のユーザーオブジェクトを作成
 FactoryBot.define do
   factory :customer do
     sequence(:email) { |n| "customer#{n}@example.com" }

@@ -1,6 +1,6 @@
-#ヘッダーリンク先テスト
-require 'rails_helper'
-require 'devise'
+# ヘッダーリンク先テスト
+require "rails_helper"
+require "devise"
 
 RSpec.describe "Header Links", type: :request do
   include Devise::Test::IntegrationHelpers
