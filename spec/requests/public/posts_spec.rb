@@ -39,7 +39,7 @@ RSpec.describe "Posts", type: :request do
   describe "POST /create" do
     it "投稿詳細へ遷移すること" do
       post public_posts_path, params: { post: valid_attributes }
-      expect(response).to redirect_to(public_post_path(Post.last))
+      expect(response).to redirect_to(post_path(Post.last))
     end
   end
 

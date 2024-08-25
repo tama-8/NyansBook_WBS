@@ -58,7 +58,7 @@ RSpec.describe "layouts/_header", type: :view do
 
     it "管理者向けのナビゲーションリンクが表示されることを確認する" do
       expect(rendered).to have_link("ダッシュボード", href: admin_dashboard_path)
-      expect(rendered).to have_link("Customer List", href: admin_root_path)
+      expect(rendered).to have_link("Customer List", href: admin_customers_path)
       expect(rendered).to have_link("Post List", href: admin_posts_path)
       expect(rendered).to have_link("Comment List", href: admin_post_comments_path)
       expect(rendered).to have_link("logout", href: destroy_admin_session_path)
