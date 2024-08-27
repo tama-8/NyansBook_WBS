@@ -101,19 +101,23 @@ end
   Kernel.srand config.seed
 =end
 # end
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "capybara/rails"
-require "capybara/rspec"
+#ENV["RAILS_ENV"] ||= "test"
+#require_relative "../config/environment"
+#require "capybara/rails"
+#require "capybara/rspec"
 
-Capybara.configure do |config|
-  config.default_driver = :selenium_chrome
-end
+#Capybara.configure do |config|
+#  config.default_driver = :rack_test
+#end
 
-RSpec.configure do |config|
-  config.include Capybara::DSL
+#RSpec.configure do |config|
+#  config.before(:each, type: :system) do
+#    driven_by :selenium_chrome
+#    driven_by :rack_test
+#  end
+#end
+#Capybara.default_driver = :rack_test
+#Capybara.javascript_driver = :rack_test
 
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome
-  end
-end
+# spec_helper.rb または rails_helper.rb の適切な場所に追加
+#Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'  # 実際のChromeのパスに置き換えてください
