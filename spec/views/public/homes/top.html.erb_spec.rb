@@ -18,6 +18,7 @@ RSpec.describe "public/homes/top", type: :view do
     end
   end
 
+
 # require "rails_helper"
 
 # RSpec.describe "public/homes/top", type: :view do

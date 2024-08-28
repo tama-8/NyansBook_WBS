@@ -13,7 +13,7 @@ RSpec.describe "AdminSessions", type: :request do
     context "無効な管理者の認証情報を使用した場合" do
       it "ログインに失敗し、エラーメッセージが表示される" do
         post admin_session_path, params: { admin: { email: "wrong@example.com", password: "wrongpassword" } }
-        expect(response.body).to include("メールアドレスまたはパスワードが無効です")
+        expect(response.body).to include("メールアドレスまたはパスワードが正しくありません")
       end
     end
   end

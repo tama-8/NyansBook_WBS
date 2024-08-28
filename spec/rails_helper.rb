@@ -64,13 +64,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome
+    driven_by :rack_test
     config.include Devise::Test::IntegrationHelpers, type: :request
     config.include Devise::Test::ControllerHelpers, type: :request
   end
 end
 # Capybaraの設定
-Capybara.configure do |config|
-  config.default_driver = :rack_test
-  config.javascript_driver = :selenium_chrome
-end
+#Capybara.configure do |config|
+#  config.default_driver = :rack_test
+#  config.javascript_driver = :rack_test
+#end
