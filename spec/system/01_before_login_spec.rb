@@ -136,19 +136,32 @@ end
         fill_in 'customer[name]', with: Faker::Lorem.characters(number: 10)
         fill_in 'customer[email]', with: Faker::Internet.email
         fill_in 'customer[password]', with: 'password'
-        fill_in 'ucustomer[password_confirmation]', with: 'password'
+        fill_in 'customer[password_confirmation]', with: 'password'
       end
 
       it '正しく新規登録される', spec_category: "CRUD機能に対するコントローラの処理と流れ(ログイン状況を意識した応用)" do
-        expect { click_button 'Sign up' }.to change(customer.all, :count).by(1)
+        expect { click_button 'Sign up' }.to change(Customer, :count).by(1)
       end
       it '新規登録後のリダイレクト先が、新規登録できたユーザの詳細画面になっている', spec_category: "CRUD機能に対するコントローラの処理と流れ(ログイン状況を意識した応用)" do
         click_button 'Sign up'
-        expect(current_path).to eq '/customers/' + Customer.last.id.to_s
+        expect(current_path).to eq '/public/customers/' + Customer.last.id.to_s
       end
     end
   end
+  
+describe 'ゲストログイン', type: :request do
+  include Devise::Test::IntegrationHelpers
 
+  it 'ゲストユーザーがログインできること' do
+    post customers_guest_sign_in_path
+    guest_user = Customer.find_by(email: 'guest@example.com')
+
+    expect(response).to redirect_to(public_customer_path(customer))
+    follow_redirect!
+
+    expect(response.body).to include('ゲストユーザーとしてログインしました。')
+  end
+end
   describe 'ユーザログイン' do
     let(:customer) { create(:customer) }
 
@@ -179,13 +192,13 @@ end
 
     context 'ログイン成功のテスト' do
       before do
-        fill_in 'customer[email]', with: customer.name
+        fill_in 'customer[email]', with: customer.email
         fill_in 'customer[password]', with: customer.password
         click_button 'Log in'
       end
 
       it 'ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている', spec_category: "CRUD機能に対するコントローラの処理と流れ(ログイン状況を意識した応用)" do
-        expect(current_path).to eq '/customers/' + customer.id.to_s
+        expect(current_path).to eq '/public/customers/' + customer.id.to_s
       end
     end
 
@@ -206,50 +219,50 @@ end
     let(:customer) { create(:customer) }
 
     before do
-      visit new_customerr_session_path
-      fill_in 'customer[name]', with: customer.name
+      visit new_customer_session_path
+      fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'Log in'
     end
 
         context 'ヘッダーの表示を確認' do
       it 'MyHomeリンクが表示される: 左上から1番目のリンクが「MyHome」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        my_home_link = find_all('li')[1].text
+        my_home_link = find_all('li')[0].text
         expect(my_home_link).to match(/MyHome/)
       end
     
       it 'MyPageリンクが表示される: 左上から2番目のリンクが「MyPage」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        my_page_link = find_all('li')[2].text
+        my_page_link = find_all('li')[1].text
         expect(my_page_link).to match(/MyPage/)
       end
     
       it 'NewPostリンクが表示される: 左上から3番目のリンクが「NewPost」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        new_post_link = find_all('li')[3].text
+        new_post_link = find_all('li')[2].text
         expect(new_post_link).to match(/NewPost/)
       end
     
       it 'PostListリンクが表示される: 左上から4番目のリンクが「PostList」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        post_list_link = find_all('li')[4].text
+        post_list_link = find_all('li')[3].text
         expect(post_list_link).to match(/PostList/)
       end
     
       it 'いいねListリンクが表示される: 左上から5番目のリンクが「いいねList」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        favorites_link = find_all('li')[5].text
+        favorites_link = find_all('li')[4].text
         expect(favorites_link).to match(/いいねList/)
       end
     
       it '通知リンクが表示される: 左上から6番目のリンクが「通知」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        notifications_link = find_all('li')[6].text
+        notifications_link = find_all('li')[5].text
         expect(notifications_link).to match(/通知/)
       end
     
       it 'logoutリンクが表示される: 左上から7番目のリンクが「logout」である', spec_category: "ログイン状況に合わせた画面表示や機能制限のロジック設定" do
-        logout_link = find_all('li')[7].text
+        logout_link = find_all('li')[6].text
         expect(logout_link).to match(/logout/)
       end
     
       it 'ロゴを押すと、トップ画面に遷移する', spec_category: "ルーティング・URL設定の理解(ログイン状況に合わせた応用)" do
-        find('a[href="/"] img').click
+        find('img[alt="にゃんずbookロゴ"]').click
         expect(current_path).to eq root_path
       end
     end
@@ -260,7 +273,7 @@ end
 
     before do
       visit new_customer_session_path
-      fill_in 'customer[name]', with: customer.name
+      fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'Log in'
       logout_link = find_all('li')[4].text
@@ -270,7 +283,7 @@ end
 
     context 'ログアウト機能のテスト' do
       it '正しくログアウトできている: ログアウト後のリダイレクト先においてAbout画面へのリンクが存在する', spec_category: "CRUD機能に対するコントローラの処理と流れ(ログイン状況を意識した応用)" do
-        expect(page).to have_link '', href: '/home/about'
+        expect(page).to have_link 'About', href: '/public/home/about'
       end
       it 'ログアウト後のリダイレクト先が、トップになっている', spec_category: "CRUD機能に対するコントローラの処理と流れ(ログイン状況を意識した応用)" do
         expect(current_path).to eq '/'

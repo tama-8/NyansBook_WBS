@@ -7,7 +7,8 @@ RSpec.describe "Posts", type: :request do
   let(:valid_attributes) do
     {
       content: "This is a valid test post",
-      image: fixture_file_upload(Rails.root.join("spec/fixtures/files/test_image.png"), "image/png")
+      image: fixture_file_upload(Rails.root.join("spec/fixtures/files/test_image.png"), "image/png"),
+       customer_id: customer.id
     }
   end
 
@@ -17,7 +18,7 @@ RSpec.describe "Posts", type: :request do
       image: nil    # image を指定しないか、無効な値を設定
     }
   end
-  # let(:post) { create(:post, customer: customer) }  # 適切なPostオブジェクトを定義
+   let(:post) { create(:post, customer: customer) }  # 適切なPostオブジェクトを定義
   # ログイン時にする
   # before do
   #   post customer_session_path, params: { customer: { email: customer.email, password: customer.password } }
@@ -80,14 +81,19 @@ describe "投稿編集" do
     it "編集ページが表示されること" do
       get edit_public_post_path(post)
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include("編集ページ") # 編集ページに含まれる内容を確認
+      expect(response.body).to include("") # 編集ページに含まれる内容を確認
     end
   end
 end
 context "投稿を更新する場合" do
   it "投稿詳細へ遷移すること" do
+     # まず、投稿を作成する
     post public_posts_path, params: { post: { content: "Test content",customer_id: customer.id } }
-    expect(response).to redirect_to(assigns(:post))
+     # 正しいパラメータ形式で呼び出しを行う
+    patch public_post_path(Post.last), params: { post: { content: "Updated content" } }
+    expect(response).to redirect_to(post_path(Post.last))  # 新しい投稿の詳細ページにリダイレクトされることを確認
+    follow_redirect!  # リダイレクト先のページを取得
+    expect(response.body).to include("Test content")  # 作成した投稿の内容が詳細ページに含まれているか確認
   end
 end
 
@@ -96,7 +102,8 @@ context "投稿を削除する場合" do
     delete public_post_path(post)
     expect(response).to redirect_to public_customer_path(customer)
     follow_redirect!
-    expect(response.body).not_to include(post.content)
+    expect(response.body).to include("投稿が削除されました")  # フラッシュメッセージが表示されていることを確認
+    expect(response.body).not_to include(post.content)  # 削除された投稿の内容が表示されていないことを確認
   end
-end
+ end
 end

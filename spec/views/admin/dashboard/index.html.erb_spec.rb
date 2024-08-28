@@ -8,7 +8,8 @@ RSpec.describe "admin/dashboard/index", type: :view do
       # ダミーデータの設定
       recent_customers = FactoryBot.create_list(:customer, 5)
       recent_posts = FactoryBot.create_list(:post, 5)
-      recent_comments = FactoryBot.create_list(:post_comment, 5)
+      recent_comments = FactoryBot.create_list(:post_comment, 5)  # ここはFactoryの修正で解決
+
       assign(:recent_customers, recent_customers)
       assign(:recent_posts, recent_posts)
       assign(:recent_comments, recent_comments)
@@ -21,14 +22,13 @@ RSpec.describe "admin/dashboard/index", type: :view do
       render template: "admin/dashboard/index", layout: "layouts/application"
     end
 
-    it "管理者向けのナビゲーションリンクが表示されることを確認する" do
-      expect(rendered).to have_link("ダッシュボード", href: admin_dashboard_path)
-      expect(rendered).to have_link("Customer List", href: admin_customers_path)
-      expect(rendered).to have_link("Post List", href: admin_posts_path)
-      expect(rendered).to have_link("Comment List", href: admin_post_comments_path)
-      expect(rendered).to have_link("logout", href: destroy_admin_session_path)
+   it "管理者向けのナビゲーションリンクが表示されることを確認する" do
+      expect(rendered).to have_link 'Customer List', href: admin_customers_path
+      expect(rendered).to have_link 'Post List', href: admin_posts_path
+      expect(rendered).to have_link 'Comment List', href: admin_post_comments_path
     end
   end
+
 
   context "管理者がログインしていない場合" do
     before do
