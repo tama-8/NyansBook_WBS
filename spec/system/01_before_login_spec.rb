@@ -149,17 +149,18 @@ end
     end
   end
   
-describe 'ゲストログイン', type: :request do
+describe 'ゲストログイン' do
   include Devise::Test::IntegrationHelpers
-
+before do
+      visit root_path
+      click_on 'Guest'
+    end
   it 'ゲストユーザーがログインできること' do
-    post customers_guest_sign_in_path
-    guest_user = Customer.find_by(email: 'guest@example.com')
-
-    expect(response).to redirect_to(public_customer_path(customer))
-    follow_redirect!
-
-    expect(response.body).to include('ゲストユーザーとしてログインしました。')
+    expect(current_path).to eq '/public/customers/' + Customer.find_by(email: "guest@example.com").id.to_s
+  end
+  it "ゲストユーザーがログイン時にフラッシュメッセージが出ること" do
+    expect(page).to have_content 'ゲストユーザーとしてログインしました。'
+    
   end
 end
   describe 'ユーザログイン' do
