@@ -5,20 +5,22 @@
 @import "public/customars";
 @import "public/chats";
 
+
+body {
+  display: flex;
+  flex-direction: column;
+  // background-color: #000;
+}
+
 body, html {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-}
 
 header, footer {
-  min-width: 960px;
+  min-width: 100%;
   width: 100%; /* 画面幅に合わせて調整 */
   margin: 0 auto;
 }
@@ -28,7 +30,7 @@ header, footer {
   justify-content: center;
   align-items: center;
   height: 100px;
-  background-color: #000;
+  // background-color: #000;
   position: fixed;
   top: 0;
   z-index: 1000;
@@ -37,17 +39,10 @@ header, footer {
 }
 
 .navbar-brand {
-  max-width: 960px;
-  max-height: 50%;
+  max-width: 100%; /* 画面幅に応じてフル幅にする */
+  height: auto; /* 高さを自動調整 */
   margin: 0 auto;
 }
-
-// .container {
-//   margin-top: 100px; /* ヘッダーの高さに合わせて調整 */
-//   flex: 1; /* フッターの上まで高さを調整 */
-//   overflow-y: auto; /* 内容が多いときにスクロール可能に */
-//   // background-color: #fff; /* 背景色を白にするなど適宜調整 */
-// }
 
 footer {
   height: 60px; /* フッターの高さ */
@@ -63,14 +58,50 @@ main {
   overflow-y: auto;
   padding-bottom: 100px; /* フッターの高さ分の余白を追加 */
 }
-
-@media (max-width: 799px) {
-  .container {
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
+@media (max-width: 991px) {
+ 
+.navbar {
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin: 0;
   }
-  
+
+  .navbar-toggler {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    display: block;
+    margin: 5px 0;
+  }
+
+  .collapse.navbar-collapse {
+    flex-direction: column;
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 10; 
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-item {
+    margin: 10px 0;
+  }
+}
+@media (max-width: 799px) {
   .navbar {
     justify-content: space-between;
     padding: 10px 20px;
@@ -93,19 +124,14 @@ main {
   }
 
   .collapse.navbar-collapse {
-    // visibility: hidden; /* メニューを初期状態で非表示 */
     flex-direction: column;
     width: 100%;
     background-color: #000;
     position: absolute;
     top: 60px;
     left: 0;
-    z-index: 10; /* メニューが他の要素の上に表示されるように設定 */
+    z-index: 10; 
   }
-
-  // .collapse.navbar-collapse.show {
-  //   visibility: visible; /* ハンバーガーメニューを表示 */
-  // }
 
   .navbar-nav {
     flex-direction: column;

@@ -2,7 +2,7 @@
   <div class="card" style="width: 400px;">
     <div class="card-body">
         <h2 class="text-center mb-4">Log in</h2>
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= form_with(model: @customer, url:customer_session_path, local: true) do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
         
         <div class="form-group mb-3">

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "admin/sessions/new", type: :view do
   before do
@@ -7,7 +7,7 @@ RSpec.describe "admin/sessions/new", type: :view do
     view.define_singleton_method(:resource) { Admin.new }
     view.define_singleton_method(:devise_mapping) { Devise.mappings[:admin] }
 
- # `admin_signed_in?`をモック
+    # `admin_signed_in?`をモック
     allow(view).to receive(:admin_signed_in?).and_return(false)
     allow(view).to receive(:customer_signed_in?).and_return(false)
 

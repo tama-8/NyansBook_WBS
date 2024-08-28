@@ -13,7 +13,7 @@ Admin.find_or_create_by!(email: "admin@admin") do |admin|
 end
 
 
-#customer1
+# customer1
 olivia = Customer.find_or_create_by!(email: "olivia@example.com") do |customer|
   customer.name = "オリビア"
   customer.password = "password"
@@ -22,7 +22,7 @@ end
 
 Post.create!(customer: olivia, content: "test", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample1.jpg"), filename: "sample1.jpg"))
 
-#customer2
+# customer2
 james = Customer.find_or_create_by!(email: "james@example.com") do |customer|
   customer.name = "ジェームズ"
   customer.password = "password"
@@ -31,7 +31,7 @@ end
 
 Post.create!(customer: james, content: "test", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample2.jpg"), filename: "sample2.jpg"))
 
-#customer3
+# customer3
 lucas = Customer.find_or_create_by!(email: "lucas@example.com") do |customer|
   customer.name = "ルーカス"
   customer.password = "password"
@@ -40,7 +40,7 @@ end
 
 Post.create!(customer: lucas, content: "test", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample3.jpg"), filename: "ssample3.jpg"))
 
-#customer4
+# customer4
 sakura = Customer.find_or_create_by!(email: "sakura@example.com") do |customer|
   customer.name = "さくら"
   customer.password = "password"
@@ -49,7 +49,7 @@ end
 
 Post.create!(customer: sakura, content: "test", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample4.jpg"), filename: "sample4.jpg"))
 
-#customer5
+# customer5
 kiki = Customer.find_or_create_by!(email: "kiki@example.com") do |customer|
   customer.name = "キキ"
   customer.password = "password"
