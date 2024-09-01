@@ -44,3 +44,4 @@ yarn-debug.log*
 
 # 特定のファイルを無視
 config/routes.rb:wqvendor/bundle/
+heroku-linux-x64.tar.gz
