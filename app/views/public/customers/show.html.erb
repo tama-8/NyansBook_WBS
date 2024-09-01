@@ -64,7 +64,7 @@
                     <i class="fa-regular fa-comment"></i> <%= post.post_comments.count %>
                   <% end %>
                 </p>
-                
+                <%= render partial: 'public/posts/score', locals: { post: post } %>
               </div>
             <!-- 説明文章をトリミング -->
             <p class="card-text"><%= truncate(post.content, length: 100) %></p>
