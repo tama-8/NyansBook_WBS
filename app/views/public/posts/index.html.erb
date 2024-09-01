@@ -51,10 +51,11 @@
                 <% end %>
               <% end %>
               </p>
+              <!--Natural Language API追加表示-->
+              <%= render partial: 'score', locals: { post: post } %>
             </div>
             <!-- 説明文章をトリミング -->
             <p class="card-text"><%= truncate(post.content, length: 100) %></p>
-            <span class="sentiment-score">emotion AI<%= post.score %></span>
             <%= link_to '詳細を見る', public_post_path(post), class: 'btn btn-primary' %>
           </div>
         </div>
