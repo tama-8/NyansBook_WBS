@@ -24,6 +24,11 @@
         <div class="alert"><%= alert %></div>
       <% end %>
       
+      <% if flash[:emotion_analysis_result] %>
+        <div class="alert alert-info">
+          <%= flash[:emotion_analysis_result] %>
+        </div>
+      <% end %>
 
       <%= yield %>
     </main>

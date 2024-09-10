@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   # 会員側のルーティング
   namespace :public do
+    #画像感情分析
+    post 'analyze_emotion', to: 'emotions#analyze'  # public側でのみ感情分析機能を使用
     # aboutページ
     get "/about", to: "homes#about"
     # マイページ
