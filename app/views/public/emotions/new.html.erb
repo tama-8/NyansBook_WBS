@@ -1,0 +1,11 @@
+<h1>猫の感情分析</h1>
+
+<%= form_with url: public_analyze_emotion_path, local: true, multipart: true do |form| %>
+  <div class="field">
+    <%= form.label :image, "画像を選択" %>
+    <%= form.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= form.submit "感情を分析する" %>
+  </div>
+<% end %>
