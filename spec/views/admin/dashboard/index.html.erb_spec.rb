@@ -22,11 +22,11 @@ RSpec.describe "admin/dashboard/index", type: :view do
       render template: "admin/dashboard/index", layout: "layouts/application"
     end
 
-   it "管理者向けのナビゲーションリンクが表示されることを確認する" do
-      expect(rendered).to have_link 'Customer List', href: admin_customers_path
-      expect(rendered).to have_link 'Post List', href: admin_posts_path
-      expect(rendered).to have_link 'Comment List', href: admin_post_comments_path
-    end
+    it "管理者向けのナビゲーションリンクが表示されることを確認する" do
+       expect(rendered).to have_link "Customer List", href: admin_customers_path
+       expect(rendered).to have_link "Post List", href: admin_posts_path
+       expect(rendered).to have_link "Comment List", href: admin_post_comments_path
+     end
   end
 
 

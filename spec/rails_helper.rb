@@ -70,7 +70,7 @@ RSpec.configure do |config|
   end
 end
 # Capybaraの設定
-#Capybara.configure do |config|
+# Capybara.configure do |config|
 #  config.default_driver = :rack_test
 #  config.javascript_driver = :rack_test
-#end
+# end

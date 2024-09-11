@@ -19,9 +19,9 @@ RSpec.describe "public/homes/top", type: :view do
   end
 
 
-# require "rails_helper"
+  # require "rails_helper"
 
-# RSpec.describe "public/homes/top", type: :view do
+  # RSpec.describe "public/homes/top", type: :view do
   let(:customer) { FactoryBot.create(:customer) }
 
   context "ログインしている場合" do

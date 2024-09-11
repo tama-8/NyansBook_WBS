@@ -35,9 +35,9 @@ class Customer < ApplicationRecord
   GUEST_USER_EMAIL = "guest@example.com"
 
   # name 属性のバリデーションが追加
-  validates :name, presence: true, length:{ minimum: 2 ,maximum: 20 }, uniqueness: true
+  validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :bio, length:{ maximum: 50 }
+  validates :bio, length: { maximum: 50 }
 
   # カスタムバリデーション
   validates :password, presence: true, confirmation: true, if: :password_required?

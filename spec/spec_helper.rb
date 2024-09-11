@@ -106,18 +106,18 @@ require_relative "../config/environment"
 require "capybara/rails"
 require "capybara/rspec"
 
-#Capybara.configure do |config|
+# Capybara.configure do |config|
 #  config.default_driver = :rack_test
-#end
+# end
 
-#RSpec.configure do |config|
+# RSpec.configure do |config|
 #  config.before(:each, type: :system) do
 #    driven_by :selenium_chrome
 #    driven_by :rack_test
 #  end
-#end
-#Capybara.default_driver = :rack_test
-#Capybara.javascript_driver = :rack_test
+# end
+# Capybara.default_driver = :rack_test
+# Capybara.javascript_driver = :rack_test
 
 # spec_helper.rb または rails_helper.rb の適切な場所に追加
-#Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'  # 実際のChromeのパスに置き換えてください
+# Selenium::WebDriver::Chrome.path = '/usr/bin/google-chrome'  # 実際のChromeのパスに置き換えてください

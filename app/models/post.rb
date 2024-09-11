@@ -31,6 +31,6 @@ class Post < ApplicationRecord
     favorites.where(customer_id: customer.id).exists?
   end
 
-  validates :content, presence: true, length:{ maximum: 200 }
+  validates :content, presence: true, length: { maximum: 200 }
   validates :image, presence: { message: "を選択してください" }
 end
