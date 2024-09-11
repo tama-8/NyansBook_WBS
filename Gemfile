@@ -89,3 +89,4 @@ gem "enum_help"
 gem "rails-i18n"
 # バッチ処理
 gem "whenever", require: false
+

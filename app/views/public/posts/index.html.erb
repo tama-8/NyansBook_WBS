@@ -51,6 +51,8 @@
                 <% end %>
               <% end %>
               </p>
+              <!--Natural Language API追加表示-->
+              <%= render partial: 'score', locals: { post: post } %>
             </div>
             <!-- 説明文章をトリミング -->
             <p class="card-text"><%= truncate(post.content, length: 100) %></p>

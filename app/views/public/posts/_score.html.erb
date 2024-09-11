@@ -1,0 +1,17 @@
+<span class="sentiment-score ml-2">
+    <% case post.score %>
+    <% when -1.0..-0.6 %>
+      <i class="fa-regular fa-face-angry"></i> <!-- 非常に悪い -->
+    <% when -0.6..-0.2 %>
+      <i class="fa-regular fa-face-frown"></i> <!-- 悪い -->
+    <% when -0.2..0.2 %>
+      <i class="fa-regular fa-face-meh"></i> <!-- 中立 -->
+    <% when 0.2..0.6 %>
+      <i class="fa-regular fa-face-smile-beam"></i> <!-- 良い -->
+    <% when 0.6..1.0 %>
+      <i class="fa-regular fa-face-laugh-squint"></i> <!-- 非常に良い -->
+    <% else %>
+      <i class="fa-regular fa-face-meh"></i> <!-- デフォルトは中立 -->
+    <% end %>
+    <%= post.score %> <!-- スコアの数値も表示 -->
+</span>
