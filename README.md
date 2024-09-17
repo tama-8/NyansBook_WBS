@@ -76,7 +76,7 @@
 9.猫と一緒に楽しめる場所や旅行情報の共有<br>
     　猫と一緒に行けるカフェや公園、旅行先の情報を共有し、猫との生活をさらに豊かにするアイデアを提供する。<br>
 ## 設計書
-![設計図](app/assets/images/blueprint.png)
+![設計図](app/assets/images/ApplicationDesignDocument)
 ​
 ## 開発環境
 - OS：Linux(CentOS)
