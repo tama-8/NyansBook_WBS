@@ -1,4 +1,5 @@
 ![サンプル画像](app/assets/images/nyans.png)
+<div><video controls src="https://github.com/user-attachments/assets/3bfef68a-0fad-47c4-a48c-f9978bb705f2" muted="false"></video></div>
 # にゃんずBook
 
 ## サイト概要
@@ -37,6 +38,10 @@
 特に高品質な製品への需要が高まっています。<br>
 2.ペット用品メーカー<br>
 　猫のおもちゃ、ベッド、トイレ用品などを提供する企業は、猫の飼い主に向けた広告を掲載する価値があります。<br>
+
+
+
+
 3.獣医関連サービス<br>
 獣医クリニック、ペット保険、オンライン獣医相談などのサービスを提供する企業も有望な広告主です。<br>
 4.ペットシッター・ペットホテル<br>
